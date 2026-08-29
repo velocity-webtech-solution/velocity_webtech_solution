@@ -160,35 +160,42 @@ const developerImage = (fileName) =>
 
 const developers = [
   {
-    name: "Rohan Sen",
-    designation: "Frontend Developer",
-    image: developerImage("dev_1.avif"),
-    skills: ["React", "Next.js", "UI Animation"],
+    name: "Subhankar ROy Choudhury",
+    designation: "Full Stack Developer",
+    image: developerImage("s1.jpeg"),
+    skills: [
+      "React",
+      "Next.js",
+      "UI Animation",
+      "APIs",
+      "Database",
+      "Security",
+    ],
   },
   {
-    name: "Priya Sharma",
+    name: "Arnab Das",
     designation: "Backend Developer",
-    image: developerImage("dev_3.avif"),
+    image: developerImage("s2.jpeg"),
     skills: ["APIs", "Database", "Security"],
   },
   {
-    name: "Arjun Mehta",
+    name: "Ayub Thapa",
     designation: "Mobile App Developer",
-    image: developerImage("dev_2.jpg"),
+    image: developerImage("s2.jpeg"),
     skills: ["Android", "iOS", "App UX"],
   },
   {
     name: "Nisha Roy",
     designation: "UI/UX Designer",
-    image: developerImage("developer-4.svg"),
+    image: developerImage("dev_2.jpg"),
     skills: ["Wireframes", "Design System", "Prototype"],
   },
-  {
-    name: "Sayan Das",
-    designation: "Cloud Engineer",
-    image: developerImage("developer-5.svg"),
-    skills: ["Hosting", "CI/CD", "Monitoring"],
-  },
+  // {
+  //   name: "Sayan Das",
+  //   designation: "Cloud Engineer",
+  //   image: developerImage("developer-5.svg"),
+  //   skills: ["Hosting", "CI/CD", "Monitoring"],
+  // },
   // {
   //   name: "Ananya Gupta",
   //   designation: "Full Stack Developer",
@@ -693,8 +700,9 @@ export default function Home() {
                   <Image
                     src={image}
                     alt={`${name} profile`}
-                    width={320}
-                    height={320}
+                    width={640}
+                    height={640}
+                    sizes="(max-width: 768px) 150px, 170px"
                   />
                 </div>
                 <div className="developer-copy">

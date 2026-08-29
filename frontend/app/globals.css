@@ -1336,10 +1336,10 @@ h2 {
   left: 50%;
   z-index: 1;
   display: grid;
-  grid-template-columns: 170px minmax(0, 1fr);
+  grid-template-columns: 190px minmax(0, 1fr);
   gap: clamp(18px, 3vw, 32px);
   align-items: center;
-  width: min(680px, 82%);
+  width: min(720px, 84%);
   min-height: 250px;
   padding: 24px 30px;
   border: 1px solid rgba(93, 188, 255, 0.28);
@@ -1378,7 +1378,7 @@ h2 {
   position: absolute;
   top: 20px;
   bottom: 20px;
-  left: 216px;
+  left: 236px;
   width: 1px;
   content: "";
   background: linear-gradient(180deg, transparent, rgba(39, 213, 255, 0.44), transparent);
@@ -1406,22 +1406,26 @@ h2 {
 
 .developer-photo-wrap {
   overflow: hidden;
-  width: 154px;
+  width: 170px;
   aspect-ratio: 1;
   border: 1px solid rgba(93, 188, 255, 0.36);
   border-radius: 8px;
-  background: #04122a;
+  background: #10141b;
   box-shadow:
     0 22px 55px rgba(0, 0, 0, 0.3),
     0 0 0 8px rgba(39, 213, 255, 0.04);
-  transform: translateZ(44px) rotate(-2deg);
+  transform: translateZ(24px);
 }
 
 .developer-photo-wrap img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  opacity: 1;
+  filter: brightness(1.18) contrast(1.12) saturate(1.06);
+  image-rendering: auto;
 }
 
 .developer-kicker {
@@ -2182,7 +2186,7 @@ h2 {
   }
 
   .developer-slide {
-    grid-template-columns: 170px minmax(0, 1fr);
+    grid-template-columns: 175px minmax(0, 1fr);
     min-height: 250px;
     padding: 24px 28px;
   }
@@ -2192,7 +2196,7 @@ h2 {
   }
 
   .developer-photo-wrap {
-    width: 158px;
+    width: 155px;
   }
 
   .slider-control {
@@ -2316,7 +2320,7 @@ h2 {
   .developer-carousel-stage {
     grid-column: 1 / -1;
     grid-row: 1;
-    height: 360px;
+    height: 370px;
   }
 
   .developer-slide {
@@ -2339,7 +2343,7 @@ h2 {
   }
 
   .developer-photo-wrap {
-    width: min(100%, 152px);
+    width: min(100%, 150px);
     margin: 0 auto;
   }
 
