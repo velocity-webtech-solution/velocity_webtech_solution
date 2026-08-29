@@ -175,7 +175,7 @@ const developers = [
   {
     name: "Arnab Das",
     designation: "Backend Developer",
-    image: developerImage("s2.jpeg"),
+    image: developerImage("s3.jpeg"),
     skills: ["APIs", "Database", "Security"],
   },
   {
