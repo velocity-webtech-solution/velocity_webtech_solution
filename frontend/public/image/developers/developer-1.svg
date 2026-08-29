@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">Developer avatar</title>
+  <desc id="desc">Stylized developer portrait</desc>
+  <defs>
+    <linearGradient id="bg" x1="36" y1="28" x2="282" y2="296" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0576f8"/>
+      <stop offset="1" stop-color="#27d5ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="320" rx="28" fill="#04122a"/>
+  <circle cx="160" cy="126" r="64" fill="url(#bg)"/>
+  <circle cx="160" cy="116" r="38" fill="#f3d0b8"/>
+  <path d="M116 106c12-34 74-42 90 5-25-9-55-7-90-5Z" fill="#10213c"/>
+  <path d="M72 282c10-66 58-94 88-94s78 28 88 94H72Z" fill="#0576f8"/>
+  <path d="M117 242h86" stroke="#dff7ff" stroke-width="10" stroke-linecap="round"/>
+</svg>
