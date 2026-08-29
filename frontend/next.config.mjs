@@ -15,7 +15,7 @@ const nextConfig = {
     unoptimized: true,
   },
 
-  basePath: "/velocity_webtech_solutions",
+  basePath: "/velocity_webtech_solution",
 };
 
 export default nextConfig;
