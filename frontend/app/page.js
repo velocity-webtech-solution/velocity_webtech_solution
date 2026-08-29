@@ -185,7 +185,7 @@ const developers = [
     skills: ["Android", "iOS", "App UX"],
   },
   {
-    name: "Nisha Roy",
+    name: "Brooklyn gilbert",
     designation: "UI/UX Designer",
     image: developerImage("dev_2.jpg"),
     skills: ["Wireframes", "Design System", "Prototype"],

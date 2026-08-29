@@ -890,9 +890,22 @@ h2 {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(2, 10, 23, 0.9), rgba(2, 10, 23, 0.58) 58%, rgba(2, 10, 23, 0.28)),
-    radial-gradient(circle at 76% 38%, rgba(255, 145, 0, 0.18), transparent 27%),
-    radial-gradient(circle at 18% 70%, rgba(39, 213, 255, 0.16), transparent 28%);
+    linear-gradient(
+      90deg,
+      rgba(2, 10, 23, 0.9),
+      rgba(2, 10, 23, 0.58) 58%,
+      rgba(2, 10, 23, 0.28)
+    ),
+    radial-gradient(
+      circle at 76% 38%,
+      rgba(255, 145, 0, 0.18),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 18% 70%,
+      rgba(39, 213, 255, 0.16),
+      transparent 28%
+    );
 }
 
 .portfolio-hero-content,
@@ -969,8 +982,16 @@ h2 {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 86% 18%, rgba(91, 210, 46, 0.12), transparent 26%),
-    radial-gradient(circle at 14% 78%, rgba(255, 145, 0, 0.13), transparent 28%),
+    radial-gradient(
+      circle at 86% 18%,
+      rgba(91, 210, 46, 0.12),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 14% 78%,
+      rgba(255, 145, 0, 0.13),
+      transparent 28%
+    ),
     linear-gradient(180deg, #020a17, #061b39);
 }
 
@@ -989,7 +1010,12 @@ h2 {
   border-radius: 8px;
   background:
     radial-gradient(circle at 16% 12%, var(--card-glow), transparent 34%),
-    linear-gradient(145deg, rgba(8, 31, 70, 0.9), rgba(3, 13, 31, 0.94) 58%, rgba(5, 23, 50, 0.92));
+    linear-gradient(
+      145deg,
+      rgba(8, 31, 70, 0.9),
+      rgba(3, 13, 31, 0.94) 58%,
+      rgba(5, 23, 50, 0.92)
+    );
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
     0 22px 50px rgba(0, 0, 0, 0.28);
@@ -1002,7 +1028,14 @@ h2 {
   height: 3px;
   content: "";
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--blue), var(--cyan), var(--green), var(--orange), var(--blue));
+  background: linear-gradient(
+    90deg,
+    var(--blue),
+    var(--cyan),
+    var(--green),
+    var(--orange),
+    var(--blue)
+  );
   background-size: 220% 100%;
   opacity: 0.7;
   animation: serviceLineFlow 2.8s linear infinite;
@@ -1175,7 +1208,11 @@ h2 {
   gap: 24px;
   padding: 74px clamp(18px, 5vw, 72px);
   background:
-    radial-gradient(circle at 90% 12%, rgba(39, 213, 255, 0.16), transparent 26%),
+    radial-gradient(
+      circle at 90% 12%,
+      rgba(39, 213, 255, 0.16),
+      transparent 26%
+    ),
     linear-gradient(135deg, #061b39, #020a17);
 }
 
@@ -1287,7 +1324,11 @@ h2 {
   padding-top: 66px;
   padding-bottom: 68px;
   background:
-    linear-gradient(135deg, rgba(39, 213, 255, 0.08) 0 1px, transparent 1px 54px),
+    linear-gradient(
+      135deg,
+      rgba(39, 213, 255, 0.08) 0 1px,
+      transparent 1px 54px
+    ),
     linear-gradient(45deg, rgba(255, 145, 0, 0.07) 0 1px, transparent 1px 62px),
     linear-gradient(180deg, #020a17, #061b39);
 }
@@ -1326,7 +1367,11 @@ h2 {
   height: 24px;
   content: "";
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(39, 213, 255, 0.28), transparent 70%);
+  background: radial-gradient(
+    ellipse,
+    rgba(39, 213, 255, 0.28),
+    transparent 70%
+  );
   filter: blur(16px);
 }
 
@@ -1381,7 +1426,12 @@ h2 {
   left: 236px;
   width: 1px;
   content: "";
-  background: linear-gradient(180deg, transparent, rgba(39, 213, 255, 0.44), transparent);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(39, 213, 255, 0.44),
+    transparent
+  );
 }
 
 .developer-slide::after {
@@ -2292,7 +2342,11 @@ h2 {
     gap: 10px;
     padding: 18px 22px;
     background:
-      radial-gradient(circle at 10% 0%, rgba(39, 213, 255, 0.14), transparent 38%),
+      radial-gradient(
+        circle at 10% 0%,
+        rgba(39, 213, 255, 0.14),
+        transparent 38%
+      ),
       #031126;
   }
 
@@ -2304,32 +2358,57 @@ h2 {
   }
 
   .developer-slider {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    display: block;
+    width: min(100%, 390px);
+    margin: 0 auto;
   }
 
   .developer-portfolio-section {
-    padding-top: 54px;
-    padding-bottom: 56px;
+    padding: 50px 18px 54px;
   }
 
   .developer-portfolio-section .section-heading {
-    margin-bottom: 18px;
+    max-width: 360px;
+    margin-bottom: 20px;
+  }
+
+  .developer-portfolio-section h2 {
+    font-size: clamp(1.7rem, 8vw, 2.3rem);
+    line-height: 1.08;
   }
 
   .developer-carousel-stage {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    height: 370px;
+    height: 350px;
+    overflow: visible;
+    perspective: 900px;
+    transform-style: preserve-3d;
+  }
+
+  .developer-carousel-stage::before {
+    inset: auto 18% 12px;
+    height: 18px;
   }
 
   .developer-slide {
     grid-template-columns: 1fr;
     top: 18px;
-    width: min(420px, 84%);
+    left: 50%;
+    width: min(300px, 78vw);
     min-height: auto;
-    padding: 22px;
+    padding: 18px 14px 16px;
     text-align: center;
+    translate: -50% 0;
+    transform-style: preserve-3d;
+  }
+
+  .developer-slide.hidden {
+    display: none;
+  }
+
+  .developer-slide.previous,
+  .developer-slide.next {
+    display: grid;
+    filter: saturate(0.72) brightness(0.86);
   }
 
   .developer-slide::before {
@@ -2339,34 +2418,69 @@ h2 {
   .developer-number {
     right: 14px;
     top: 12px;
-    font-size: 2.6rem;
+    font-size: 2rem;
   }
 
   .developer-photo-wrap {
-    width: min(100%, 150px);
+    width: 118px;
     margin: 0 auto;
+    box-shadow:
+      0 16px 34px rgba(0, 0, 0, 0.26),
+      0 0 0 6px rgba(39, 213, 255, 0.04);
   }
 
   .developer-copy h3 {
-    font-size: clamp(1.6rem, 9vw, 2.2rem);
+    margin-top: 14px;
+    font-size: 22px;
+    line-height: 1.06;
   }
 
   .developer-copy p {
-    font-size: 0.96rem;
+    font-size: 0.88rem;
   }
 
   .developer-kicker {
     margin: 0 auto;
+    padding: 6px 10px;
+    font-size: 0.7rem;
   }
 
   .developer-skills {
     justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .developer-skills span {
+    padding: 6px 8px;
+    font-size: 0.7rem;
   }
 
   .slider-control {
-    grid-row: 2;
-    width: 100%;
-    height: 42px;
+    position: absolute;
+    top: 190px;
+    width: 34px;
+    height: 34px;
+    margin-top: 0;
+    border-radius: 8px;
+    background: rgba(5, 20, 45, 0.82);
+  }
+
+  .slider-control:first-of-type {
+    left: 6px;
+  }
+
+  .slider-control:last-of-type {
+    right: 6px;
+  }
+
+  .slider-control svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .developer-slider-dots {
+    margin-top: 12px;
   }
 
   .hero-stats {
