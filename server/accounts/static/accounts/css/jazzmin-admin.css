@@ -1,0 +1,109 @@
+body.dashboard .app-main {
+    background: #f4f6f9;
+}
+
+#jazzy-sidebar {
+    background: #343a40 !important;
+}
+
+#jazzy-sidebar .sidebar-brand {
+    background: #343a40;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#jazzy-sidebar .brand-text,
+#jazzy-sidebar .nav-link,
+#jazzy-sidebar .user-panel .info,
+#jazzy-sidebar .nav-header {
+    color: #d6dde5 !important;
+}
+
+#jazzy-sidebar .nav-header {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    opacity: 0.75;
+}
+
+#jazzy-sidebar .nav-sidebar .nav-link.active {
+    background: #2f80ed !important;
+    color: #ffffff !important;
+}
+
+#jazzy-navbar {
+    min-height: 48px;
+    background: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.content-header h1,
+.app-content-header h1 {
+    font-size: 1.45rem;
+    font-weight: 400;
+    text-transform: lowercase;
+}
+
+.breadcrumb {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.dashboard .card {
+    border: 0;
+    border-top: 3px solid #2f80ed;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.14);
+}
+
+.dashboard .card-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+}
+
+.dashboard .card-header h5 {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.dashboard .card-body {
+    padding: 0.75rem 1rem;
+}
+
+.dashboard .table {
+    margin-bottom: 0;
+}
+
+.dashboard .table td {
+    padding: 0.42rem 0.35rem;
+    vertical-align: middle;
+}
+
+.dashboard .btn {
+    border-radius: 0;
+    box-shadow: none;
+    text-transform: none;
+}
+
+.dashboard .btn-success {
+    background: #28a745;
+    border-color: #28a745;
+}
+
+.dashboard .btn-info {
+    background: #ffffff;
+    border-color: #17a2b8;
+    color: #17a2b8;
+}
+
+#recent-actions-module h4 {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+#recent-actions-module .timeline-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
+}

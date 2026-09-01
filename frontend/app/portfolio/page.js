@@ -113,7 +113,7 @@ export default function Portfolio() {
 
       <section className="portfolio-hero">
         <Image
-          src={`${BASE_PATH}/image/banner_new.png`}
+          src={`${BASE_PATH}/image/banner_new_1.png`}
           alt="Portfolio background"
           className="portfolio-hero-bg"
           width={1942}
@@ -194,7 +194,7 @@ export default function Portfolio() {
           {developerProfiles.map(
             (
               { name, title, category, text, icon: Icon, tone, skills },
-              index
+              index,
             ) => (
               <motion.article
                 className={`portfolio-card ${tone}`}
@@ -240,7 +240,7 @@ export default function Portfolio() {
                   ))}
                 </div>
               </motion.article>
-            )
+            ),
           )}
         </div>
       </section>

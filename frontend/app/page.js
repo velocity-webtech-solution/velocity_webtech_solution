@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Header from "../components/header/page";
+import Footer from "../components/footer/page";
 import {
   ArrowRight,
   ArrowUp,
@@ -28,6 +29,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { submitContactForm } from "./api/apiservice";
 
 const BASE_PATH = "/velocity_webtech_solution";
 
@@ -106,6 +108,8 @@ const techChips = [
   "FastAPI",
   "AWS Cloud",
   "UI/UX",
+  "WordPress",
+  "Php",
 ];
 
 const processSteps = [
@@ -160,7 +164,7 @@ const developerImage = (fileName) =>
 
 const developers = [
   {
-    name: "Subhankar ROy Choudhury",
+    name: "Subhankar Roy Choudhury",
     designation: "Full Stack Developer",
     image: developerImage("s1.jpeg"),
     skills: [
@@ -202,14 +206,6 @@ const developers = [
   //   image: developerImage("developer-6.svg"),
   //   skills: ["Frontend", "Backend", "Deployment"],
   // },
-];
-
-const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Contact Us", href: "#contact" },
 ];
 
 const fadeUp = {
@@ -329,12 +325,37 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  function handleContactSubmit(event) {
+  async function handleContactSubmit(event) {
     event.preventDefault();
-    setContactStatus({
-      type: "success",
-      message: "This contact form is currently not connected to a backend.",
-    });
+    setSubmitting(true);
+    setContactStatus({ type: "", message: "" });
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await submitContactForm({
+        name: formData.get("name"),
+        phone: formData.get("phone"),
+        email: formData.get("email"),
+        service: formData.get("service"),
+        message: formData.get("message"),
+      });
+
+      form.reset();
+      setContactStatus({
+        type: "success",
+        message: response.message || "Enquiry Submitted Successfully.",
+      });
+    } catch (error) {
+      setContactStatus({
+        type: "error",
+        message:
+          error.message || "Something went wrong. Please try again shortly.",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -353,7 +374,7 @@ export default function Home() {
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
         <Image
-          src={`${BASE_PATH}/image/banner_new.png`}
+          src={`${BASE_PATH}/image/banner_new_1.png`}
           alt="Velocity Webtech digital solutions banner"
           className="hero-bg"
           width={1942}
@@ -626,7 +647,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section id="portfolio" className="section developer-portfolio-section">
+      {/* <section id="portfolio" className="section developer-portfolio-section">
         <motion.div
           className="section-heading centered"
           initial="hidden"
@@ -741,7 +762,7 @@ export default function Home() {
             />
           ))}
         </div>
-      </section>
+      </section> */}
 
       <section className="section process-section">
         <motion.div
@@ -802,7 +823,7 @@ export default function Home() {
             <div className="contact-actions">
               <a href="tel:9674700201">
                 <Phone size={22} />
-                9674700201
+                +91 6291499409
               </a>
               <a href="mailto:velocitywebtechsolution@gmail.com">
                 <Mail size={22} />
@@ -890,54 +911,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <footer className="site-footer">
-        <div className="footer-inner">
-          <div className="footer-brand">
-            <Image
-              src={`${BASE_PATH}/image/logo.png`}
-              alt="Velocity Webtech Solution logo"
-              width={64}
-              height={64}
-            />
-            <div>
-              <h3>Velocity Webtech Solution</h3>
-              <p>
-                Modern, secure, and scalable digital solutions for businesses
-                ready to grow online.
-              </p>
-            </div>
-          </div>
-
-          <div className="footer-column">
-            <h4>Quick Links</h4>
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href}>
-                {item.label}
-              </a>
-            ))}
-          </div>
-
-          <div className="footer-column">
-            <h4>Services</h4>
-            <a href="#services">Website Development</a>
-            <a href="#services">Mobile App Development</a>
-            <a href="#services">Custom Software</a>
-            <a href="#services">E-commerce</a>
-          </div>
-
-          <div className="footer-column">
-            <h4>Contact</h4>
-            <a href="tel:9674700201">9674700201</a>
-            <a href="mailto:velocitywebtechsolution@gmail.com">
-              velocitywebtechsolution@gmail.com
-            </a>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© 2026 Velocity Webtech Solution. All rights reserved.</span>
-          <span>Your Vision, Our Mission.</span>
-        </div>
-      </footer>
+      <Footer />
 
       {showScrollTop && (
         <motion.button

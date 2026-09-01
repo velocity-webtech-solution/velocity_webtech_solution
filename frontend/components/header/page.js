@@ -11,7 +11,7 @@ const navItems = [
   { label: "Home", href: `${BASE_PATH}#home` },
   { label: "Services", href: `${BASE_PATH}#services` },
   { label: "About", href: `${BASE_PATH}#about` },
-  { label: "Portfolio", href: `${BASE_PATH}#portfolio` },
+  // { label: "Portfolio", href: `${BASE_PATH}#portfolio` },
   { label: "Contact Us", href: `${BASE_PATH}#contact` },
 ];
 
@@ -64,7 +64,7 @@ export default function Header() {
       >
         <div className="brand-logo">
           <Image
-            src={`${BASE_PATH}/image/logo.png`}
+            src={`${BASE_PATH}/image/logo_new.gif`}
             alt="Velocity Webtech Solution logo"
             width={54}
             height={54}
