@@ -837,6 +837,7 @@ export default function Home() {
             variants={fadeUp}
             onSubmit={handleContactSubmit}
           >
+            <h3 className="contact-form-title">Send Your Query</h3>
             <div className="form-row">
               <label>
                 Full Name

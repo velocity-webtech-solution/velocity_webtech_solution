@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
           "velocity_admin_user",
           JSON.stringify(response.user),
         );
-        router.push("/admin/admin_dashboard");
+        router.push("/admin/dashboard");
         return;
       }
 

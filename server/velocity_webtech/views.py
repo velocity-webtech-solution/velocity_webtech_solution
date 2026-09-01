@@ -1,11 +1,14 @@
+import logging
+
 from django.conf import settings
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-import logging
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .models import ContactSubmission
 from .serializers import ContactSubmissionSerializer
 
 logger = logging.getLogger(__name__)
@@ -14,6 +17,46 @@ logger = logging.getLogger(__name__)
 class ContactSubmissionCreateView(APIView):
     authentication_classes = []
     permission_classes = []
+
+    def get(self, request):
+        page_number = request.query_params.get("page", 1)
+        page_size = request.query_params.get("page_size", 10)
+
+        try:
+            page_size = max(1, min(int(page_size), 100))
+        except (TypeError, ValueError):
+            page_size = 10
+
+        submissions = ContactSubmission.objects.all()
+        paginator = Paginator(submissions, page_size)
+
+        try:
+            page = paginator.page(page_number)
+        except PageNotAnInteger:
+            page = paginator.page(1)
+        except EmptyPage:
+            page = paginator.page(paginator.num_pages)
+
+        serializer = ContactSubmissionSerializer(page.object_list, many=True)
+
+        return Response(
+            {
+                "results": serializer.data,
+                "count": paginator.count,
+                "page": page.number,
+                "page_size": page_size,
+                "total_pages": paginator.num_pages,
+                "has_next": page.has_next(),
+                "has_previous": page.has_previous(),
+                "stats": {
+                    "total": paginator.count,
+                    "new": submissions.filter(email_sent=False).count(),
+                    "contacted": submissions.filter(email_sent=True).count(),
+                    "converted": 0,
+                },
+            },
+            status=status.HTTP_200_OK,
+        )
 
     def post(self, request):
         serializer = ContactSubmissionSerializer(data=request.data)

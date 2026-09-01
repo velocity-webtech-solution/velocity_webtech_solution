@@ -24,6 +24,25 @@ export async function submitContactForm(payload) {
   return data;
 }
 
+export async function fetchContactSubmissions({ page = 1, pageSize = 10 } = {}) {
+  const params = new URLSearchParams({
+    page: String(page),
+    page_size: String(pageSize),
+  });
+
+  const response = await fetch(`${API_BASE_URL}/contact-submissions/?${params}`, {
+    method: "GET",
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.message || "Unable to fetch contact submissions.");
+  }
+
+  return data;
+}
+
 export async function adminLogin(payload) {
   const response = await fetch(`${ACCOUNTS_API_BASE_URL}/admin-login/`, {
     method: "POST",

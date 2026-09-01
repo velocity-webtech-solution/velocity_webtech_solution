@@ -6,10 +6,12 @@ from .models import ContactSubmission
 @admin.register(ContactSubmission)
 class ContactSubmissionAdmin(admin.ModelAdmin):
     list_display = (
+        "id",
         "full_name",
         "phone",
         "email",
         "service",
+        "message",
         "email_sent",
         "created_at",
     )
