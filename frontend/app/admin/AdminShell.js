@@ -16,7 +16,7 @@ import { useEffect, useMemo, useState } from "react";
 const BASE_PATH = "/velocity_webtech_solution";
 
 const pageTitles = {
-  [`${BASE_PATH}/admin/dashboad/`]: {
+  [`${BASE_PATH}/admin/dashboard/`]: {
     title: "Admin Dashboard",
     current: "Dashboard",
   },
@@ -83,7 +83,7 @@ export default function AdminShell({ children }) {
           <nav className="admin-sidebar-nav" aria-label="Admin navigation">
             <a
               className={header.current === "Dashboard" ? "active" : ""}
-              href={`${BASE_PATH}/admin/dashboad/`}
+              href={`${BASE_PATH}/admin/dashboard/`}
             >
               <LayoutDashboard size={18} />
               Dashboard
@@ -111,7 +111,7 @@ export default function AdminShell({ children }) {
             <div>
               <h1>{header.title}</h1>
               <nav aria-label="Breadcrumb">
-                <a href={`${BASE_PATH}/admin/dashboad/`}>Dashboard</a>
+                <a href={`${BASE_PATH}/admin/dashboard/`}>Dashboard</a>
                 <span>/</span>
                 <strong>{header.current}</strong>
               </nav>

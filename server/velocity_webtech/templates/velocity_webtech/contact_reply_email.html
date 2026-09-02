@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ reply.subject }}</title>
+  </head>
+  <body style="margin:0;padding:0;background:#eef4fb;font-family:Arial,Helvetica,sans-serif;color:#172033;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#eef4fb;padding:28px 12px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:680px;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #dbe7f5;box-shadow:0 14px 34px rgba(15,23,42,0.12);">
+            <tr>
+              <td style="padding:26px 30px;background:#071a36;background-image:linear-gradient(135deg,#071a36,#123c73);">
+                <p style="margin:0 0 8px;color:#4dd8ff;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;">Velocity Webtech Reply</p>
+                <h1 style="margin:0;color:#ffffff;font-size:26px;line-height:1.25;font-weight:800;">{{ reply.service }}</h1>
+                <p style="margin:12px 0 0;color:#cfe2ff;font-size:15px;line-height:1.6;">Thank you for contacting Velocity Webtech Solution. Please find our reply below.</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:28px 30px 8px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td style="padding:0 0 18px;">
+                      <p style="margin:0;color:#6b7280;font-size:12px;font-weight:700;text-transform:uppercase;">Client Name</p>
+                      <p style="margin:6px 0 0;color:#111827;font-size:20px;font-weight:800;">{{ reply.client_name }}</p>
+                    </td>
+                  </tr>
+                </table>
+
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="50%" style="padding:14px 14px 14px 0;border-top:1px solid #e5edf7;">
+                      <p style="margin:0;color:#6b7280;font-size:12px;font-weight:700;text-transform:uppercase;">Phone Number</p>
+                      <p style="margin:7px 0 0;color:#111827;font-size:15px;font-weight:700;">{{ reply.client_phone }}</p>
+                    </td>
+                    <td width="50%" style="padding:14px 0 14px 14px;border-top:1px solid #e5edf7;">
+                      <p style="margin:0;color:#6b7280;font-size:12px;font-weight:700;text-transform:uppercase;">Email Address</p>
+                      <p style="margin:7px 0 0;font-size:15px;font-weight:700;">
+                        <a href="mailto:{{ reply.client_email }}" style="color:#1d70f5;text-decoration:none;">{{ reply.client_email }}</a>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="50%" style="padding:14px 14px 14px 0;border-top:1px solid #e5edf7;">
+                      <p style="margin:0;color:#6b7280;font-size:12px;font-weight:700;text-transform:uppercase;">Service Required</p>
+                      <p style="margin:7px 0 0;color:#111827;font-size:15px;font-weight:700;">{{ reply.service }}</p>
+                    </td>
+                    <td width="50%" style="padding:14px 0 14px 14px;border-top:1px solid #e5edf7;">
+                      <p style="margin:0;color:#6b7280;font-size:12px;font-weight:700;text-transform:uppercase;">Submitted At</p>
+                      <p style="margin:7px 0 0;color:#111827;font-size:15px;font-weight:700;">{{ reply.submitted_at }}</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:8px 30px 30px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f8fbff;border:1px solid #dce9f8;border-radius:12px;">
+                  <tr>
+                    <td style="padding:20px;">
+                      <p style="margin:0 0 10px;color:#0f4fa8;font-size:13px;font-weight:800;text-transform:uppercase;">Message</p>
+                      <p style="margin:0;color:#253047;font-size:15px;line-height:1.7;">{{ reply.message|linebreaksbr }}</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:22px 30px;background:#f7fafc;border-top:1px solid #e5edf7;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td style="color:#64748b;font-size:13px;line-height:1.5;">
+                      Sent from Velocity Webtech Solution.
+                    </td>
+                    <td align="right">
+                      <a href="mailto:{{ reply.sender_email }}" style="display:inline-block;background:#2f80ed;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 16px;border-radius:8px;">Reply to Velocity</a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

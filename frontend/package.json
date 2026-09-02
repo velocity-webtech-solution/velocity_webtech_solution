@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build && node scripts/prepare-static-basepath.mjs",
+    "start": "npx --yes serve@latest out -l 3000",
     "lint": "next lint"
   },
   "dependencies": {

@@ -135,7 +135,7 @@ export default function AdminDashboardPage() {
             </div>
             <div>
               <span>Dashboard route</span>
-              <strong>/admin/dashboad</strong>
+              <strong>/admin/dashboard</strong>
             </div>
           </div>
         </article>

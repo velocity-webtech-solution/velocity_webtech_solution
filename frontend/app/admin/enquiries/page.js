@@ -22,7 +22,12 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { fetchContactSubmissions } from "../../../api/apiservice";
+import EmailDialog from "../../../components/email-dialog/EmailDialog";
+import AdminShell from "../AdminShell";
+import {
+  fetchContactSubmissions,
+  fetchEnquiryEmails,
+} from "../../api/apiservice";
 
 const BASE_PATH = "/velocity_webtech_solution";
 const PAGE_SIZE = 10;
@@ -69,6 +74,14 @@ export default function EnquiriesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [emailDialog, setEmailDialog] = useState({
+    open: false,
+    enquiry: null,
+    loading: false,
+    error: "",
+    messages: [],
+    fromAccount: "",
+  });
   const [pagination, setPagination] = useState({
     count: 0,
     page: 1,
@@ -219,8 +232,55 @@ export default function EnquiriesPage() {
     }));
   }
 
+  async function handleEmailDialogOpen(enquiry) {
+    setEmailDialog({
+      open: true,
+      enquiry,
+      loading: true,
+      error: "",
+      messages: [],
+      fromAccount: "",
+    });
+
+    try {
+      const data = await fetchEnquiryEmails({
+        email: enquiry.email,
+        service: enquiry.requirement,
+        message: enquiry.note,
+      });
+      setEmailDialog({
+        open: true,
+        enquiry,
+        loading: false,
+        error: "",
+        messages: data.results || [],
+        fromAccount: data.from_account || "",
+      });
+    } catch (error) {
+      setEmailDialog({
+        open: true,
+        enquiry,
+        loading: false,
+        error: error.message || "Unable to fetch emails.",
+        messages: [],
+        fromAccount: "",
+      });
+    }
+  }
+
+  function handleEmailDialogClose() {
+    setEmailDialog({
+      open: false,
+      enquiry: null,
+      loading: false,
+      error: "",
+      messages: [],
+      fromAccount: "",
+    });
+  }
+
   return (
-    <>
+    <AdminShell>
       <section className="enquiry-stat-grid" aria-label="Enquiry summary">
         {stats.map(({ label, value, note, icon: Icon }) => (
           <article key={label}>
@@ -344,13 +404,14 @@ export default function EnquiriesPage() {
                           >
                             <Eye size={16} />
                           </button>
-                          <a
+                          <button
+                            type="button"
                             className="enquiry-mail-action"
-                            href={`mailto:${enquiry.email}`}
+                            onClick={() => handleEmailDialogOpen(enquiry)}
                             aria-label={`Email ${enquiry.name}`}
                           >
                             <Mail size={16} />
-                          </a>
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -421,7 +482,7 @@ export default function EnquiriesPage() {
           <aside className="enquiry-detail-card">
             <header>
               <div>
-                <a href={`${BASE_PATH}/admin/admin_dashboard/`}>
+                <a href={`${BASE_PATH}/admin/dashboard/`}>
                   <ArrowLeft size={16} />
                 </a>
                 <h2>Enquiry #{selectedEnquiry.id}</h2>
@@ -576,6 +637,8 @@ export default function EnquiriesPage() {
           </aside>
         )}
       </section>
-    </>
+
+      <EmailDialog emailDialog={emailDialog} onClose={handleEmailDialogClose} />
+    </AdminShell>
   );
 }
