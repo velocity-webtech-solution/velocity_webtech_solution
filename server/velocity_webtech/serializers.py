@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import ContactSubmission
+from .models import ContactSubmission, EnquiryEmailReply
 
 
 class ContactSubmissionSerializer(serializers.ModelSerializer):
@@ -20,3 +20,18 @@ class ContactSubmissionSerializer(serializers.ModelSerializer):
             "created_at",
         ]
         read_only_fields = ["id", "full_name", "email_sent", "created_at"]
+
+
+class EnquiryEmailReplySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EnquiryEmailReply
+        fields = [
+            "id",
+            "contact_submission",
+            "subject",
+            "message",
+            "from_email",
+            "to_email",
+            "sent_at",
+        ]
+        read_only_fields = fields

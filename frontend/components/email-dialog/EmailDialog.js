@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import {
   BriefcaseBusiness,
   CalendarDays,
+  ChevronDown,
+  ChevronUp,
   ClipboardList,
   Mail,
   Phone,
@@ -45,18 +47,73 @@ function formatEmailDate(value) {
   ).toLowerCase()}`;
 }
 
+function stripQuotedReplyText(value) {
+  if (!value) {
+    return "";
+  }
+
+  let text = String(value).replace(/\r/g, "").trim();
+
+  const quotePatterns = [
+    /\s+On\s+(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?[\s\S]*?wrote:\s*[\s\S]*$/i,
+    /\n\s*On\s+.+wrote:\s*[\s\S]*$/i,
+    /\n\s*-{2,}\s*Original Message\s*-{2,}\s*[\s\S]*$/i,
+    /\n\s*From:\s*.+\n\s*Sent:\s*.+\n\s*To:\s*.+\n\s*Subject:\s*[\s\S]*$/i,
+  ];
+
+  quotePatterns.some((pattern) => {
+    const cleanedText = text.replace(pattern, "").trim();
+
+    if (cleanedText !== text) {
+      text = cleanedText;
+      return true;
+    }
+
+    return false;
+  });
+
+  text = text
+    .split("\n")
+    .filter((line) => !line.trim().startsWith(">"))
+    .join("\n")
+    .replace(/\n\s*--\s*\n[\s\S]*$/i, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+
+  return text || String(value).trim();
+}
+
 export default function EmailDialog({ emailDialog, onClose }) {
   const enquiry = emailDialog.enquiry;
+  const submissionMessages = getSubmissionMessages();
   const replyComposerRef = useRef(null);
   const replyTextareaRef = useRef(null);
   const [replyComposer, setReplyComposer] = useState({
     messageId: "",
+    enquiryId: "",
+    email: "",
+    name: "",
+    phone: "",
+    requirement: "",
+    submittedAt: "",
     subject: "",
     message: "",
     sending: false,
     status: "",
     error: "",
   });
+  const [replyHistory, setReplyHistory] = useState([]);
+  const [expandedReplyId, setExpandedReplyId] = useState("");
+
+  useEffect(() => {
+    const savedReplies = (emailDialog.replies || []).map(normalizeReply);
+    const clientReplies = (emailDialog.messages || [])
+      .map(normalizeClientReply)
+      .filter(Boolean);
+
+    setReplyHistory(mergeReplyHistory([...savedReplies, ...clientReplies]));
+    setExpandedReplyId("");
+  }, [emailDialog.messages, emailDialog.replies, enquiry?.id]);
 
   useEffect(() => {
     if (!emailDialog.open || !replyComposer.messageId) {
@@ -79,6 +136,27 @@ export default function EmailDialog({ emailDialog, onClose }) {
     return null;
   }
 
+  function getSubmissionMessages() {
+    const submissions =
+      emailDialog.submissions && emailDialog.submissions.length
+        ? emailDialog.submissions
+        : enquiry
+          ? [enquiry]
+          : [];
+
+    return [...submissions]
+      .sort((first, second) => new Date(second.createdAt) - new Date(first.createdAt))
+      .map((submission) => ({
+        ...submission,
+        id: `submission-${submission.id}`,
+        enquiryId: submission.id,
+        subject: `New contact enquiry - ${submission.requirement || "Website Development"}`,
+        date: submission.createdAt || submission.date,
+        body: submission.note,
+        submission,
+      }));
+  }
+
   function getMessageId(message) {
     return message.id || `${message.subject}-${message.date}`;
   }
@@ -95,6 +173,72 @@ export default function EmailDialog({ emailDialog, onClose }) {
     return subject.toLowerCase().startsWith("re:") ? subject : `Re: ${subject}`;
   }
 
+  function normalizeReply(reply) {
+    return {
+      id: reply.id || `${reply.subject}-${reply.sent_at || reply.sentAt}`,
+      enquiryId: reply.contact_submission || reply.enquiryId || "",
+      direction: reply.direction || "outgoing",
+      subject: reply.subject || "Reply from Velocity Webtech Solution",
+      message: reply.message || "",
+      from: reply.from || reply.from_email || emailDialog.fromAccount || "-",
+      to: reply.to || reply.to_email || enquiry?.email || "-",
+      sentAt: reply.sent_at || reply.sentAt || "",
+    };
+  }
+
+  function normalizeClientReply(message) {
+    const clientEmail = (enquiry?.email || "").toLowerCase();
+    const fromEmail = (message.from?.email || "").toLowerCase();
+
+    if (!clientEmail || fromEmail !== clientEmail) {
+      return null;
+    }
+
+    return {
+      id: `gmail-${getMessageId(message)}`,
+      direction: "incoming",
+      subject: message.subject || "Client reply",
+      message: stripQuotedReplyText(getBodyText(message)),
+      from: message.from?.email || enquiry.email,
+      to: message.to?.email || emailDialog.fromAccount || "-",
+      sentAt: message.date || "",
+    };
+  }
+
+  function mergeReplyHistory(replies) {
+    const uniqueReplies = new Map();
+
+    replies.forEach((reply) => {
+      uniqueReplies.set(reply.id, reply);
+    });
+
+    return [...uniqueReplies.values()].sort(
+      (first, second) => new Date(second.sentAt) - new Date(first.sentAt),
+    );
+  }
+
+  function normalizeSubject(value) {
+    return (value || "")
+      .toLowerCase()
+      .replace(/^(re:\s*)+/i, "")
+      .trim();
+  }
+
+  function doesReplyBelongToSubmission(reply, submission) {
+    if (reply.enquiryId && String(reply.enquiryId) === String(submission?.id)) {
+      return true;
+    }
+
+    const subject = normalizeSubject(reply.subject);
+    const service = (submission?.requirement || "").toLowerCase();
+
+    return Boolean(
+      service &&
+        subject.includes("new contact enquiry") &&
+        subject.includes(service),
+    );
+  }
+
   function handleReplyOpen(message) {
     const messageId = getMessageId(message);
 
@@ -102,6 +246,12 @@ export default function EmailDialog({ emailDialog, onClose }) {
       if (current.messageId === messageId) {
         return {
           messageId: "",
+          enquiryId: "",
+          email: "",
+          name: "",
+          phone: "",
+          requirement: "",
+          submittedAt: "",
           subject: "",
           message: "",
           sending: false,
@@ -112,6 +262,12 @@ export default function EmailDialog({ emailDialog, onClose }) {
 
       return {
         messageId,
+        enquiryId: message.submission?.id || enquiry?.id || "",
+        email: message.submission?.email || enquiry?.email || "",
+        name: message.submission?.name || enquiry?.name || "",
+        phone: message.submission?.phone || enquiry?.phone || "",
+        requirement: message.submission?.requirement || enquiry?.requirement || "",
+        submittedAt: message.submission?.date || enquiry?.date || "",
         subject: getReplySubject(message.subject),
         message: "",
         sending: false,
@@ -124,7 +280,7 @@ export default function EmailDialog({ emailDialog, onClose }) {
   async function handleReplySubmit(event) {
     event.preventDefault();
 
-    if (!enquiry?.email) {
+    if (!replyComposer.email) {
       setReplyComposer((current) => ({
         ...current,
         status: "",
@@ -150,15 +306,22 @@ export default function EmailDialog({ emailDialog, onClose }) {
     }));
 
     try {
-      await sendEnquiryReply({
-        email: enquiry.email,
+      const data = await sendEnquiryReply({
+        enquiryId: replyComposer.enquiryId,
+        email: replyComposer.email,
         subject: replyComposer.subject,
         message: replyComposer.message,
-        name: enquiry?.name,
-        phone: enquiry?.phone,
-        service: enquiry?.requirement,
-        submittedAt: enquiry?.date,
+        name: replyComposer.name,
+        phone: replyComposer.phone,
+        service: replyComposer.requirement,
+        submittedAt: replyComposer.submittedAt,
       });
+      const savedReply = normalizeReply(data.reply || {});
+
+      setReplyHistory((current) =>
+        mergeReplyHistory([savedReply, ...current]),
+      );
+      setExpandedReplyId(savedReply.id);
 
       setReplyComposer((current) => ({
         ...current,
@@ -224,7 +387,7 @@ export default function EmailDialog({ emailDialog, onClose }) {
 
           {!emailDialog.loading &&
             !emailDialog.error &&
-            emailDialog.messages.length === 0 && (
+            submissionMessages.length === 0 && (
               <p className="email-dialog-state">
                 No emails found for this enquiry email.
               </p>
@@ -232,11 +395,16 @@ export default function EmailDialog({ emailDialog, onClose }) {
 
           {!emailDialog.loading &&
             !emailDialog.error &&
-            emailDialog.messages.length > 0 && (
+            submissionMessages.length > 0 && (
               <div className="email-message-list">
-                {emailDialog.messages.map((message) => {
+                {submissionMessages.map((message) => {
                   const messageId = getMessageId(message);
                   const bodyText = getBodyText(message);
+                  const cardEnquiry = message.submission || enquiry;
+                  const cardReplyHistory = replyHistory.filter((reply) =>
+                    doesReplyBelongToSubmission(reply, cardEnquiry),
+                  );
+                  const showReplyHistory = cardReplyHistory.length > 0;
 
                   return (
                     <article key={messageId}>
@@ -252,7 +420,7 @@ export default function EmailDialog({ emailDialog, onClose }) {
                               <UserRound size={16} />
                               Client Details
                             </span>
-                            <h3>{enquiry?.name || "Client"}</h3>
+                            <h3>{cardEnquiry?.name || "Client"}</h3>
                           </div>
 
                           <dl className="email-client-grid">
@@ -261,21 +429,21 @@ export default function EmailDialog({ emailDialog, onClose }) {
                                 <Phone size={17} />
                               </span>
                               <dt>Phone Number</dt>
-                              <dd>{enquiry?.phone || "-"}</dd>
+                              <dd>{cardEnquiry?.phone || "-"}</dd>
                             </div>
                             <div className="email">
                               <span>
                                 <Mail size={17} />
                               </span>
                               <dt>Email Address</dt>
-                              <dd>{enquiry?.email || "-"}</dd>
+                              <dd>{cardEnquiry?.email || "-"}</dd>
                             </div>
                             <div className="service">
                               <span>
                                 <BriefcaseBusiness size={17} />
                               </span>
                               <dt>Service Required</dt>
-                              <dd>{enquiry?.requirement || "-"}</dd>
+                              <dd>{cardEnquiry?.requirement || "-"}</dd>
                             </div>
                             <div className="submitted">
                               <span>
@@ -285,7 +453,7 @@ export default function EmailDialog({ emailDialog, onClose }) {
                               <dd>
                                 {message.date
                                   ? formatEmailDate(message.date)
-                                  : enquiry?.date || "-"}
+                                  : cardEnquiry?.date || "-"}
                               </dd>
                             </div>
                           </dl>
@@ -296,7 +464,7 @@ export default function EmailDialog({ emailDialog, onClose }) {
                             </span>
                             <div>
                               <p>Project Details</p>
-                              <strong>{enquiry?.note || bodyText}</strong>
+                              <strong>{cardEnquiry?.note || bodyText}</strong>
                             </div>
                           </div>
                         </section>
@@ -315,6 +483,71 @@ export default function EmailDialog({ emailDialog, onClose }) {
                             Reply to Client
                           </button>
                         </footer>
+
+                        {showReplyHistory && (
+                          <section
+                            className="email-reply-history"
+                            aria-label="Reply history"
+                          >
+                            <p>Reply History</p>
+                            <div>
+                              {cardReplyHistory.map((reply) => {
+                                const isExpanded = expandedReplyId === reply.id;
+
+                                return (
+                                  <div
+                                    className="email-reply-item"
+                                    key={reply.id}
+                                  >
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        setExpandedReplyId((current) =>
+                                          current === reply.id ? "" : reply.id,
+                                        )
+                                      }
+                                      aria-expanded={isExpanded}
+                                    >
+                                      <span>
+                                        <small>
+                                          {reply.direction === "incoming"
+                                            ? "Client Reply"
+                                            : "Velocity Reply"}
+                                        </small>
+                                        {reply.subject}
+                                      </span>
+                                      <time>{formatEmailDate(reply.sentAt)}</time>
+                                      {isExpanded ? (
+                                        <ChevronUp size={16} />
+                                      ) : (
+                                        <ChevronDown size={16} />
+                                      )}
+                                    </button>
+
+                                    {isExpanded && (
+                                      <div className="email-reply-detail">
+                                        <dl>
+                                          <div>
+                                            <dt>From</dt>
+                                            <dd>{reply.from}</dd>
+                                          </div>
+                                          <div>
+                                            <dt>To</dt>
+                                            <dd>{reply.to}</dd>
+                                          </div>
+                                        </dl>
+                                        <div className="email-reply-message">
+                                          <span>Message</span>
+                                          <p>{reply.message}</p>
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </section>
+                        )}
 
                         {replyComposer.messageId === messageId && (
                           <form
@@ -381,11 +614,17 @@ export default function EmailDialog({ emailDialog, onClose }) {
                                 <button
                                   type="button"
                                   onClick={() =>
-                                    setReplyComposer({
-                                      messageId: "",
-                                      subject: "",
-                                      message: "",
-                                      sending: false,
+                                  setReplyComposer({
+                                    messageId: "",
+                                    enquiryId: "",
+                                    email: "",
+                                    name: "",
+                                    phone: "",
+                                    requirement: "",
+                                    submittedAt: "",
+                                    subject: "",
+                                    message: "",
+                                    sending: false,
                                       status: "",
                                       error: "",
                                     })

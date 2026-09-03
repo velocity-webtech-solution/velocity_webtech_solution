@@ -69,7 +69,44 @@ export async function fetchEnquiryEmails({ email, service, message }) {
   return data;
 }
 
+export async function fetchEnquiryReplies(enquiryId) {
+  const params = new URLSearchParams({
+    enquiry_id: String(enquiryId),
+  });
+
+  const response = await fetch(`${API_BASE_URL}/contact-submissions/reply/?${params}`, {
+    method: "GET",
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.message || "Unable to fetch enquiry replies.");
+  }
+
+  return data;
+}
+
+export async function fetchEnquiryReplyHistoryByEmail(email) {
+  const params = new URLSearchParams({
+    email,
+  });
+
+  const response = await fetch(`${API_BASE_URL}/contact-submissions/reply/?${params}`, {
+    method: "GET",
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.message || "Unable to fetch enquiry reply history.");
+  }
+
+  return data;
+}
+
 export async function sendEnquiryReply({
+  enquiryId,
   email,
   subject,
   message,
@@ -84,6 +121,7 @@ export async function sendEnquiryReply({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      enquiry_id: enquiryId,
       email,
       subject,
       message,

@@ -16,8 +16,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import ContactSubmission
-from .serializers import ContactSubmissionSerializer
+from .models import ContactSubmission, EnquiryEmailReply
+from .serializers import ContactSubmissionSerializer, EnquiryEmailReplySerializer
 
 logger = logging.getLogger(__name__)
 
@@ -299,14 +299,16 @@ class ContactSubmissionEmailHistoryView(APIView):
         return messages
 
     def filter_messages_for_enquiry(self, messages, service, message):
-        filters = [value.lower() for value in (service, message) if value]
+        service_filter = service.lower()
+        message_filter = message.lower()
 
-        if not filters:
+        if not service_filter and not message_filter:
             return messages
 
         matched_messages = []
 
         for gmail_message in messages:
+            subject = gmail_message.get("subject", "").lower()
             searchable_text = " ".join(
                 [
                     gmail_message.get("subject", ""),
@@ -314,8 +316,15 @@ class ContactSubmissionEmailHistoryView(APIView):
                     gmail_message.get("body", ""),
                 ]
             ).lower()
+            service_matches = not service_filter or service_filter in searchable_text
+            message_matches = not message_filter or message_filter in searchable_text
+            reply_thread_matches = (
+                service_filter
+                and "new contact enquiry" in subject
+                and service_filter in subject
+            )
 
-            if all(value in searchable_text for value in filters):
+            if (service_matches and message_matches) or reply_thread_matches:
                 matched_messages.append(gmail_message)
 
         return matched_messages
@@ -350,20 +359,69 @@ class ContactSubmissionReplyEmailView(APIView):
     authentication_classes = []
     permission_classes = []
 
+    def get(self, request):
+        enquiry_id = request.query_params.get("enquiry_id")
+        customer_email = (request.query_params.get("email") or "").strip()
+
+        if customer_email:
+            submissions = ContactSubmission.objects.filter(email__iexact=customer_email)
+            replies = EnquiryEmailReply.objects.filter(
+                contact_submission__email__iexact=customer_email
+            )
+
+            return Response(
+                {
+                    "email": customer_email,
+                    "count": replies.count(),
+                    "submissions": ContactSubmissionSerializer(submissions, many=True).data,
+                    "results": EnquiryEmailReplySerializer(replies, many=True).data,
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        if not enquiry_id:
+            return Response(
+                {"message": "Enquiry id or email query parameter is required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        replies = EnquiryEmailReply.objects.filter(contact_submission_id=enquiry_id)
+        serializer = EnquiryEmailReplySerializer(replies, many=True)
+
+        return Response(
+            {
+                "enquiry_id": enquiry_id,
+                "count": replies.count(),
+                "results": serializer.data,
+            },
+            status=status.HTTP_200_OK,
+        )
+
     def post(self, request):
+        enquiry_id = request.data.get("enquiry_id")
         customer_email = (request.data.get("email") or "").strip()
         subject = (request.data.get("subject") or "Reply from Velocity Webtech Solution").strip()
         message = (request.data.get("message") or "").strip()
-        client_name = (request.data.get("name") or "Client").strip()
-        client_phone = (request.data.get("phone") or "-").strip()
-        service = (request.data.get("service") or "Website Development").strip()
-        submitted_at = (request.data.get("submitted_at") or "-").strip()
 
-        if not customer_email:
+        if not enquiry_id:
             return Response(
-                {"message": "Client email is required."},
+                {"message": "Enquiry id is required."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
+
+        try:
+            submission = ContactSubmission.objects.get(id=enquiry_id)
+        except ContactSubmission.DoesNotExist:
+            return Response(
+                {"message": "Enquiry was not found."},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        customer_email = customer_email or submission.email
+        client_name = (request.data.get("name") or submission.full_name or "Client").strip()
+        client_phone = (request.data.get("phone") or submission.phone or "-").strip()
+        service = (request.data.get("service") or submission.service or "Website Development").strip()
+        submitted_at = (request.data.get("submitted_at") or "-").strip()
 
         try:
             validate_email(customer_email)
@@ -416,6 +474,13 @@ class ContactSubmissionReplyEmailView(APIView):
             )
             email_message.attach_alternative(html_message, "text/html")
             email_message.send(fail_silently=False)
+            reply = EnquiryEmailReply.objects.create(
+                contact_submission=submission,
+                subject=subject,
+                message=message,
+                from_email=sender_email,
+                to_email=customer_email,
+            )
         except Exception as error:
             logger.exception("Reply email not sent.")
             return Response(
@@ -424,6 +489,19 @@ class ContactSubmissionReplyEmailView(APIView):
             )
 
         return Response(
-            {"message": "Reply email sent successfully."},
+            {
+                "message": "Reply email sent successfully.",
+                "reply": {
+                    "id": reply.id,
+                    "contact_submission": reply.contact_submission_id,
+                    "subject": reply.subject,
+                    "message": reply.message,
+                    "from": reply.from_email,
+                    "to": reply.to_email,
+                    "from_email": reply.from_email,
+                    "to_email": reply.to_email,
+                    "sent_at": reply.sent_at.isoformat(),
+                },
+            },
             status=status.HTTP_200_OK,
         )

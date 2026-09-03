@@ -4,8 +4,10 @@ import {
   ArrowLeft,
   CalendarDays,
   CheckCircle2,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
+  ChevronUp,
   CircleDot,
   Download,
   Eye,
@@ -21,12 +23,13 @@ import {
   UsersRound,
   X,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import EmailDialog from "../../../components/email-dialog/EmailDialog";
 import AdminShell from "../AdminShell";
 import {
   fetchContactSubmissions,
   fetchEnquiryEmails,
+  fetchEnquiryReplyHistoryByEmail,
 } from "../../api/apiservice";
 
 const BASE_PATH = "/velocity_webtech_solution";
@@ -52,6 +55,27 @@ function formatDate(value) {
   }).format(date);
 }
 
+function formatDateTime(value) {
+  if (!value) {
+    return "-";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "-";
+  }
+
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  }).format(date);
+}
+
 function mapSubmissionToEnquiry(submission) {
   return {
     id: submission.id,
@@ -64,8 +88,50 @@ function mapSubmissionToEnquiry(submission) {
     emailSent: Boolean(submission.email_sent),
     status: submission.email_sent ? "Contacted" : "New",
     date: formatDate(submission.created_at),
+    dateTime: formatDateTime(submission.created_at),
+    createdAt: submission.created_at || "",
     note: submission.message || "No project details provided.",
   };
+}
+
+function groupEnquiriesByEmail(enquiries) {
+  const groups = new Map();
+
+  enquiries.forEach((enquiry) => {
+    const emailKey = (enquiry.email || "").trim().toLowerCase();
+    const key = emailKey || `enquiry-${enquiry.id}`;
+    const currentGroup = groups.get(key) || {
+      key,
+      email: enquiry.email,
+      records: [],
+    };
+
+    currentGroup.records.push(enquiry);
+    groups.set(key, currentGroup);
+  });
+
+  return [...groups.values()]
+    .map((group) => {
+      const records = [...group.records].sort(
+        (first, second) =>
+          new Date(second.createdAt) - new Date(first.createdAt),
+      );
+      const latest = records[0];
+
+      return {
+        ...latest,
+        groupKey: group.key,
+        records,
+        recordCount: records.length,
+        emailSent: records.some((record) => record.emailSent),
+        status: records.some((record) => record.emailSent)
+          ? "Contacted"
+          : "New",
+      };
+    })
+    .sort(
+      (first, second) => new Date(second.createdAt) - new Date(first.createdAt),
+    );
 }
 
 export default function EnquiriesPage() {
@@ -74,12 +140,15 @@ export default function EnquiriesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [expandedEmailKey, setExpandedEmailKey] = useState("");
   const [emailDialog, setEmailDialog] = useState({
     open: false,
     enquiry: null,
     loading: false,
     error: "",
     messages: [],
+    replies: [],
+    submissions: [],
     fromAccount: "",
   });
   const [pagination, setPagination] = useState({
@@ -160,22 +229,25 @@ export default function EnquiriesPage() {
 
   const filteredEnquiries = useMemo(() => {
     const search = searchTerm.trim().toLowerCase();
+    const groupedEnquiries = groupEnquiriesByEmail(enquiries);
 
     if (!search) {
-      return enquiries;
+      return groupedEnquiries;
     }
 
-    return enquiries.filter((enquiry) =>
-      [
-        enquiry.name,
-        enquiry.phone,
-        enquiry.email,
-        enquiry.requirement,
-        enquiry.note,
-      ]
-        .join(" ")
-        .toLowerCase()
-        .includes(search),
+    return groupedEnquiries.filter((group) =>
+      group.records.some((enquiry) =>
+        [
+          enquiry.name,
+          enquiry.phone,
+          enquiry.email,
+          enquiry.requirement,
+          enquiry.note,
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(search),
+      ),
     );
   }, [enquiries, searchTerm]);
 
@@ -226,34 +298,51 @@ export default function EnquiriesPage() {
     }
 
     setSelectedEnquiry(null);
+    setExpandedEmailKey("");
     setPagination((current) => ({
       ...current,
       page,
     }));
   }
 
-  async function handleEmailDialogOpen(enquiry) {
+  async function handleEmailDialogOpen(enquiry, options = {}) {
+    const showSingleService = Boolean(options.showSingleService);
+    const records = showSingleService
+      ? [enquiry]
+      : enquiry.records || [enquiry];
+
     setEmailDialog({
       open: true,
       enquiry,
       loading: true,
       error: "",
       messages: [],
+      replies: [],
+      submissions: records,
       fromAccount: "",
     });
 
     try {
-      const data = await fetchEnquiryEmails({
-        email: enquiry.email,
-        service: enquiry.requirement,
-        message: enquiry.note,
-      });
+      const [data, historyData] = await Promise.all([
+        fetchEnquiryEmails({
+          email: enquiry.email,
+          service: showSingleService ? enquiry.requirement : "",
+          message: showSingleService ? enquiry.note : "",
+        }),
+        fetchEnquiryReplyHistoryByEmail(enquiry.email),
+      ]);
+      const submissions = showSingleService
+        ? records
+        : (historyData.submissions || []).map(mapSubmissionToEnquiry);
+
       setEmailDialog({
         open: true,
-        enquiry,
+        enquiry: showSingleService ? enquiry : submissions[0] || enquiry,
         loading: false,
         error: "",
         messages: data.results || [],
+        replies: historyData.results || [],
+        submissions: submissions.length ? submissions : records,
         fromAccount: data.from_account || "",
       });
     } catch (error) {
@@ -263,6 +352,8 @@ export default function EnquiriesPage() {
         loading: false,
         error: error.message || "Unable to fetch emails.",
         messages: [],
+        replies: [],
+        submissions: records,
         fromAccount: "",
       });
     }
@@ -275,6 +366,8 @@ export default function EnquiriesPage() {
       loading: false,
       error: "",
       messages: [],
+      replies: [],
+      submissions: [],
       fromAccount: "",
     });
   }
@@ -325,11 +418,10 @@ export default function EnquiriesPage() {
               <thead>
                 <tr>
                   <th>#</th>
+                  <th aria-label="Expand row"></th>
                   <th>Name</th>
                   <th>Phone</th>
                   <th>Email</th>
-                  <th>Service</th>
-                  <th>Enquiries Message</th>
                   <th>Email Sent</th>
                   <th>Date</th>
                   <th>Action</th>
@@ -338,7 +430,7 @@ export default function EnquiriesPage() {
               <tbody>
                 {loading && (
                   <tr>
-                    <td className="enquiry-table-message" colSpan={9}>
+                    <td className="enquiry-table-message" colSpan={8}>
                       Loading enquiries...
                     </td>
                   </tr>
@@ -346,7 +438,7 @@ export default function EnquiriesPage() {
 
                 {!loading && errorMessage && (
                   <tr>
-                    <td className="enquiry-table-message error" colSpan={9}>
+                    <td className="enquiry-table-message error" colSpan={8}>
                       {errorMessage}
                     </td>
                   </tr>
@@ -356,7 +448,7 @@ export default function EnquiriesPage() {
                   !errorMessage &&
                   filteredEnquiries.length === 0 && (
                     <tr>
-                      <td className="enquiry-table-message" colSpan={9}>
+                      <td className="enquiry-table-message" colSpan={8}>
                         No enquiries found.
                       </td>
                     </tr>
@@ -364,58 +456,166 @@ export default function EnquiriesPage() {
 
                 {!loading &&
                   !errorMessage &&
-                  filteredEnquiries.map((enquiry, index) => (
-                    <tr
-                      key={enquiry.id}
-                      className={
-                        selectedEnquiry?.id === enquiry.id ? "selected" : ""
-                      }
-                    >
-                      <td>
-                        {(pagination.page - 1) * pagination.pageSize +
-                          index +
-                          1}
-                      </td>
-                      <td>{enquiry.name}</td>
-                      <td>{enquiry.phone}</td>
-                      <td>{enquiry.email}</td>
-                      <td>{enquiry.requirement}</td>
-                      <td>
-                        <span className="enquiry-message-preview">
-                          {enquiry.note}
-                        </span>
-                      </td>
-                      <td>
-                        <span
-                          className={`email-sent-pill ${
-                            enquiry.emailSent ? "sent" : "pending"
-                          }`}
+                  filteredEnquiries.map((enquiry, index) => {
+                    const isExpanded = expandedEmailKey === enquiry.groupKey;
+
+                    return (
+                      <Fragment key={enquiry.groupKey}>
+                        <tr
+                          className={[
+                            selectedEnquiry?.groupKey === enquiry.groupKey
+                              ? "selected"
+                              : "",
+                            isExpanded ? "expanded" : "",
+                          ]
+                            .filter(Boolean)
+                            .join(" ")}
+                          onClick={() =>
+                            setExpandedEmailKey((current) =>
+                              current === enquiry.groupKey
+                                ? ""
+                                : enquiry.groupKey,
+                            )
+                          }
                         >
-                          {enquiry.emailSent ? "Yes" : "No"}
-                        </span>
-                      </td>
-                      <td>{enquiry.date}</td>
-                      <td>
-                        <div className="enquiry-action-buttons">
-                          <button
-                            type="button"
-                            onClick={() => setSelectedEnquiry(enquiry)}
-                            aria-label={`View ${enquiry.name}`}
-                          >
-                            <Eye size={16} />
-                          </button>
-                          <button
-                            type="button"
-                            className="enquiry-mail-action"
-                            onClick={() => handleEmailDialogOpen(enquiry)}
-                            aria-label={`Email ${enquiry.name}`}
-                          >
-                            <Mail size={16} />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                          <td>
+                            {(pagination.page - 1) * pagination.pageSize +
+                              index +
+                              1}
+                          </td>
+                          <td>
+                            <button
+                              type="button"
+                              className="enquiry-row-toggle"
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                setExpandedEmailKey((current) =>
+                                  current === enquiry.groupKey
+                                    ? ""
+                                    : enquiry.groupKey,
+                                );
+                              }}
+                              aria-label={
+                                isExpanded
+                                  ? `Collapse ${enquiry.email} records`
+                                  : `Expand ${enquiry.email} records`
+                              }
+                              aria-expanded={isExpanded}
+                            >
+                              {isExpanded ? (
+                                <ChevronUp size={16} />
+                              ) : (
+                                <ChevronDown size={16} />
+                              )}
+                            </button>
+                          </td>
+                          <td>{enquiry.name}</td>
+                          <td>{enquiry.phone}</td>
+                          <td>
+                            <button
+                              type="button"
+                              className="enquiry-email-toggle"
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                setExpandedEmailKey((current) =>
+                                  current === enquiry.groupKey
+                                    ? ""
+                                    : enquiry.groupKey,
+                                );
+                              }}
+                              aria-expanded={isExpanded}
+                            >
+                              {enquiry.email}
+                              {enquiry.recordCount > 1 && (
+                                <span>{enquiry.recordCount} records</span>
+                              )}
+                            </button>
+                          </td>
+                          <td>
+                            <span
+                              className={`email-sent-pill ${
+                                enquiry.emailSent ? "sent" : "pending"
+                              }`}
+                            >
+                              {enquiry.emailSent ? "Yes" : "No"}
+                            </span>
+                          </td>
+                          <td>{enquiry.date}</td>
+                          <td>
+                            <div className="enquiry-action-buttons">
+                              <button
+                                type="button"
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  setSelectedEnquiry(enquiry);
+                                }}
+                                aria-label={`View ${enquiry.name}`}
+                              >
+                                <Eye size={16} />
+                              </button>
+                              {/* <button
+                                type="button"
+                                className="enquiry-mail-action"
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  handleEmailDialogOpen(enquiry);
+                                }}
+                                aria-label={`Email ${enquiry.name}`}
+                              >
+                                <Mail size={16} />
+                              </button> */}
+                            </div>
+                          </td>
+                        </tr>
+
+                        {isExpanded && (
+                          <tr className="enquiry-expanded-row">
+                            <td colSpan={8}>
+                              <div className="enquiry-email-records">
+                                <table>
+                                  <thead>
+                                    <tr>
+                                      <th>Service</th>
+                                      <th>Enquiries Message</th>
+                                      <th>Date & Time</th>
+                                      <th>Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {enquiry.records.map((record) => (
+                                      <tr key={record.id}>
+                                        <td>{record.requirement}</td>
+                                        <td>
+                                          <span className="enquiry-message-preview">
+                                            {record.note}
+                                          </span>
+                                        </td>
+                                        <td>{record.dateTime}</td>
+                                        <td>
+                                          <button
+                                            type="button"
+                                            className="enquiry-mail-action"
+                                            onClick={() =>
+                                              handleEmailDialogOpen(record, {
+                                                showSingleService: true,
+                                              })
+                                            }
+                                            aria-label={`Open email history for ${record.requirement}`}
+                                          >
+                                            <Mail size={15} />
+                                          </button>
+                                        </td>
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                      </Fragment>
+                    );
+                  })}
               </tbody>
             </table>
           </div>
