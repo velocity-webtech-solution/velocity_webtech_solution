@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = ['*']
 
 
 CORS_ORIGIN_WHITELIST = [
@@ -75,6 +75,10 @@ CSRF_TRUSTED_ORIGINS = [
    "http://127.0.0.1:3000",
    "http://127.0.0.1:8000",
    "http://localhost:8000",
+   "http://velocitywebtechsolution.com",
+   "http://www.velocitywebtechsolution.com",
+   "https://velocitywebtechsolution.com",
+   "https://www.velocitywebtechsolution.com",
 ]
 
 
