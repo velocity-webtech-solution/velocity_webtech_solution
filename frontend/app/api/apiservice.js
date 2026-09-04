@@ -1,10 +1,10 @@
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ||
-  "http://127.0.0.1:8000/api/velocity-webtech";
+  "/api/velocity-webtech";
 
 const ACCOUNTS_API_BASE_URL =
   process.env.NEXT_PUBLIC_ACCOUNTS_API_BASE_URL ||
-  "http://127.0.0.1:8000/api/accounts";
+  "/api/accounts";
 
 export async function submitContactForm(payload) {
   const response = await fetch(`${API_BASE_URL}/contact-submissions/`, {
