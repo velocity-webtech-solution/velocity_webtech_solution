@@ -113,7 +113,7 @@ JAZZMIN_SETTINGS = {
         {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
         {
             "name": "Support",
-            "url": "mailto:velocitywebtechsolution@gmail.com",
+            "url": "mailto:subhankar.rc@velocitywebtechsolution.com",
             "new_window": True,
         },
         {"model": "auth.User"},
@@ -266,6 +266,7 @@ CORS_ORIGIN_ALLOW=True
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
+BUSINESS_EMAIL = "subhankar.rc@velocitywebtechsolution.com"
 EMAIL_BACKEND = os.getenv(
     "EMAIL_BACKEND",
     "django.core.mail.backends.console.EmailBackend",
@@ -273,13 +274,9 @@ EMAIL_BACKEND = os.getenv(
 EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
 EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True") == "True"
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+EMAIL_HOST_USER = (os.getenv("EMAIL_HOST_USER") or BUSINESS_EMAIL).strip()
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
-DEFAULT_FROM_EMAIL = os.getenv(
-    "DEFAULT_FROM_EMAIL",
-    EMAIL_HOST_USER or "velocitywebtechsolution@gmail.com",
-)
-CONTACT_RECEIVER_EMAIL = os.getenv(
-    "CONTACT_RECEIVER_EMAIL",
-    "velocitywebtechsolution@gmail.com",
-)
+DEFAULT_FROM_EMAIL = (os.getenv("DEFAULT_FROM_EMAIL") or EMAIL_HOST_USER).strip()
+CONTACT_RECEIVER_EMAIL = (
+    os.getenv("CONTACT_RECEIVER_EMAIL") or EMAIL_HOST_USER
+).strip()

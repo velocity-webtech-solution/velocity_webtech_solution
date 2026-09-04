@@ -50,9 +50,7 @@ export default function Footer() {
         <div className="footer-column">
           <h4>Contact</h4>
           <a href="tel:+916291499409">+91 6291499409</a>
-          <a href="mailto:velocitywebtechsolution@gmail.com">
-            velocitywebtechsolution@gmail.com
-          </a>
+          <a>subhankar.rc@velocitywebtechsolution.com</a>
         </div>
       </div>
       <div className="footer-bottom">

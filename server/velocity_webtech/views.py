@@ -12,6 +12,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -139,18 +140,27 @@ class ContactSubmissionCreateView(APIView):
         submission = serializer.save()
 
         email_sent, email_error = self.send_contact_email(submission)
+        auto_reply_sent = False
+        auto_reply_error = ""
+
         if email_sent:
             submission.email_sent = True
             submission.save(update_fields=["email_sent"])
+            auto_reply_sent, auto_reply_error = self.send_auto_thank_you_email(
+                submission
+            )
 
         response_data = {
             "message": "Enquiry Submitted Successfully.",
             "email_sent": email_sent,
+            "auto_reply_sent": auto_reply_sent,
             "data": ContactSubmissionSerializer(submission).data,
         }
 
         if email_error and settings.DEBUG:
             response_data["email_error"] = email_error
+        if auto_reply_error and settings.DEBUG:
+            response_data["auto_reply_error"] = auto_reply_error
 
         return Response(response_data, status=status.HTTP_201_CREATED)
 
@@ -191,6 +201,60 @@ class ContactSubmissionCreateView(APIView):
             email_message.send(fail_silently=False)
         except Exception as error:
             logger.exception("Contact email not sent.")
+            return False, str(error)
+
+        return True, ""
+
+    def send_auto_thank_you_email(self, submission):
+        sender_email = (
+            getattr(settings, "CONTACT_RECEIVER_EMAIL", "")
+            or settings.DEFAULT_FROM_EMAIL
+            or settings.EMAIL_HOST_USER
+        )
+
+        if not sender_email or not settings.EMAIL_HOST_PASSWORD:
+            error = "Gmail sending credentials are not configured."
+            logger.error("Auto thank-you email not sent: %s", error)
+            return False, error
+
+        subject = f"Thank's for your enquiry - {submission.service}"
+        message = "Thank's for your Enquiries"
+        submitted_at = timezone.localtime(submission.created_at).strftime("%d %b %Y")
+
+        try:
+            html_message = render_to_string(
+                "velocity_webtech/contact_reply_email.html",
+                {
+                    "reply": {
+                        "subject": subject,
+                        "message": message,
+                        "client_name": submission.full_name,
+                        "client_email": submission.email,
+                        "client_phone": submission.phone,
+                        "service": submission.service,
+                        "submitted_at": submitted_at,
+                        "sender_email": sender_email,
+                    }
+                },
+            )
+            email_message = EmailMultiAlternatives(
+                subject,
+                message,
+                sender_email,
+                [submission.email],
+                reply_to=[sender_email],
+            )
+            email_message.attach_alternative(html_message, "text/html")
+            email_message.send(fail_silently=False)
+            EnquiryEmailReply.objects.create(
+                contact_submission=submission,
+                subject=subject,
+                message=message,
+                from_email=sender_email,
+                to_email=submission.email,
+            )
+        except Exception as error:
+            logger.exception("Auto thank-you email not sent.")
             return False, str(error)
 
         return True, ""

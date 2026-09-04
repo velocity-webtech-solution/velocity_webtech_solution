@@ -372,7 +372,7 @@ export default function EmailDialog({ emailDialog, onClose }) {
         <div className="email-dialog-account">
           <span>Gmail account</span>
           <strong>
-            {emailDialog.fromAccount || "velocitywebtechsolution@gmail.com"}
+            {emailDialog.fromAccount || "subhankar.rc@velocitywebtechsolution.com"}
           </strong>
         </div>
 

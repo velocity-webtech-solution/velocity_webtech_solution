@@ -39,42 +39,49 @@ const services = [
     text: "Responsive, fast, and SEO-friendly websites and web applications.",
     icon: Globe2,
     tone: "blue",
+    path: "/website-development-services-pricing/",
   },
   {
     title: "Mobile App Development",
     text: "Modern Android and iOS applications with smooth user experiences.",
     icon: Smartphone,
     tone: "green",
+    path: "/mobile-app-development-services-pricing/",
   },
   {
     title: "Custom Software Development",
     text: "Business-specific software solutions and automation systems.",
     icon: Code2,
     tone: "violet",
+    path: "/custom-software-development-services-pricing/",
   },
   {
     title: "E-commerce Development",
     text: "Powerful online stores with secure payment integration.",
     icon: ShoppingCart,
     tone: "orange",
+    path: "/e-commerce-development-services-pricing/",
   },
   {
     title: "UI/UX Design",
     text: "Clean, attractive, and user-friendly digital experiences.",
     icon: Layers3,
     tone: "cyan",
+    path: "/ui-ux-design-services-pricing/",
   },
   {
     title: "API & Backend Development",
     text: "Secure and scalable APIs, databases, and backend systems.",
     icon: Server,
     tone: "indigo",
+    path: "/api-backend-development-services-pricing/",
   },
   {
     title: "Cloud & Deployment Services",
     text: "Deployment, hosting, maintenance, and cloud solutions.",
     icon: Cloud,
     tone: "sky",
+    path: "/cloud-deployment-services-pricing/",
   },
 ];
 
@@ -363,16 +370,6 @@ export default function Home() {
       <Header />
 
       <section id="home" className="hero">
-        <motion.div
-          className="hero-pulse hero-pulse-one"
-          animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.85, 0.5] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="hero-pulse hero-pulse-two"
-          animate={{ y: [0, -20, 0], opacity: [0.35, 0.7, 0.35] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
         <Image
           src={`${BASE_PATH}/image/banner_new_1.png`}
           alt="Velocity Webtech digital solutions banner"
@@ -390,13 +387,20 @@ export default function Home() {
         >
           <motion.p className="eyebrow" variants={fadeUp}>
             <Sparkles size={18} />
-            Software Development Services
+            Web, App & Software Studio
           </motion.p>
-          <motion.h2 variants={fadeUp}>Velocity Webtech Solution</motion.h2>
+          <motion.h1 variants={fadeUp}>Velocity Webtech Solution</motion.h1>
           <motion.p className="hero-copy" variants={fadeUp}>
-            Reliable and innovative digital solutions that help businesses grow
-            with modern, scalable, secure, and tailored software.
+            We design and build polished websites, mobile apps, backend systems,
+            and cloud-ready products for businesses that want to move faster
+            with confidence.
           </motion.p>
+          <motion.div className="hero-service-line" variants={fadeUp}>
+            <span>Strategy</span>
+            <span>UI/UX</span>
+            <span>Development</span>
+            <span>Deployment</span>
+          </motion.div>
           <motion.div className="hero-actions" variants={fadeUp}>
             <motion.a
               className="primary-button"
@@ -416,6 +420,7 @@ export default function Home() {
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.96 }}
             >
+              <Layers3 size={18} />
               Explore Services
             </motion.a>
           </motion.div>
@@ -435,46 +440,63 @@ export default function Home() {
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.35, ease: "easeOut" }}
         >
-          <motion.div
-            className="launch-card"
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <span className="launch-icon">
-              <Rocket size={28} />
-            </span>
-            <div>
-              <strong>Launch Ready</strong>
-              <span>Idea to powerful digital product</span>
+          <div className="hero-console">
+            <div className="hero-console-top">
+              <span />
+              <span />
+              <span />
+              <strong>Project Command Center</strong>
             </div>
-          </motion.div>
 
-          <div className="hero-feature-grid">
-            {heroFeatures.map(({ title, icon: Icon }, index) => (
-              <motion.div
-                className="hero-feature-card"
-                key={title}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.55 + index * 0.12 }}
-                whileHover={{ y: -6, scale: 1.03 }}
-              >
-                <Icon size={24} />
-                <span>{title}</span>
-              </motion.div>
-            ))}
+            <div className="hero-launch-panel">
+              <span className="launch-icon">
+                <Rocket size={28} />
+              </span>
+              <div>
+                <p>Launch Status</p>
+                <strong>Ready for production</strong>
+              </div>
+            </div>
+
+            <div className="hero-feature-grid">
+              {heroFeatures.map(({ title, icon: Icon }, index) => (
+                <motion.div
+                  className="hero-feature-card"
+                  key={title}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.55 + index * 0.12 }}
+                  whileHover={{ y: -6, scale: 1.03 }}
+                >
+                  <Icon size={24} />
+                  <span>{title}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="hero-progress-list">
+              {processSteps.map(({ title, icon: Icon }, index) => (
+                <div key={title}>
+                  <span>
+                    <Icon size={16} />
+                  </span>
+                  <strong>{title}</strong>
+                  <small>{index + 1 < 10 ? `0${index + 1}` : index + 1}</small>
+                </div>
+              ))}
+            </div>
+
+            <motion.div
+              className="tech-strip"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.95 }}
+            >
+              {techChips.slice(0, 8).map((chip) => (
+                <span key={chip}>{chip}</span>
+              ))}
+            </motion.div>
           </div>
-
-          <motion.div
-            className="tech-strip"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.95 }}
-          >
-            {techChips.map((chip) => (
-              <span key={chip}>{chip}</span>
-            ))}
-          </motion.div>
         </motion.div>
       </section>
 
@@ -505,7 +527,7 @@ export default function Home() {
         >
           <p className="eyebrow">
             <Zap size={18} />
-            Our Services
+            Our Services & Pricing
           </p>
           <h2>
             From idea to launch, we turn your vision into powerful digital
@@ -520,9 +542,10 @@ export default function Home() {
           viewport={{ once: true, amount: 0.18 }}
           variants={staggerGroup}
         >
-          {services.map(({ title, text, icon: Icon, tone }, index) => (
-            <motion.article
+          {services.map(({ title, text, icon: Icon, tone, path }, index) => (
+            <motion.a
               className={`service-card ${tone}`}
+              href={`${BASE_PATH}${path}`}
               key={title}
               variants={fadeUp}
               transition={{ delay: index * 0.05, duration: 0.45 }}
@@ -549,7 +572,7 @@ export default function Home() {
                 <span>Build With Us</span>
                 <ArrowRight size={17} />
               </div>
-            </motion.article>
+            </motion.a>
           ))}
         </motion.div>
       </section>
@@ -630,7 +653,7 @@ export default function Home() {
           </motion.div>
           <div className="brochure-frame">
             <Image
-              src={`${BASE_PATH}/image/Brochure.png`}
+              src={`${BASE_PATH}/image/brochure_2.png`}
               alt="Velocity Webtech services brochure"
               width={1536}
               height={1024}
@@ -825,9 +848,9 @@ export default function Home() {
                 <Phone size={22} />
                 +91 6291499409
               </a>
-              <a href="mailto:velocitywebtechsolution@gmail.com">
+              <a>
                 <Mail size={22} />
-                velocitywebtechsolution@gmail.com
+                subhankar.rc@velocitywebtechsolution.com
               </a>
             </div>
           </motion.div>

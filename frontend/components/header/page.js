@@ -88,7 +88,7 @@ export default function Header() {
         ))}
       </nav>
 
-      <motion.a
+      {/* <motion.a
         className="header-cta"
         href={`${BASE_PATH}#contact`}
         onClick={(event) => handleNavClick(event, `${BASE_PATH}#contact`)}
@@ -97,7 +97,7 @@ export default function Header() {
       >
         <MessageCircle size={18} />
         Get Started
-      </motion.a>
+      </motion.a> */}
 
       <button
         className="menu-button"
