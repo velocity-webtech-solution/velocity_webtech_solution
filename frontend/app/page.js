@@ -31,7 +31,7 @@ import {
 import { useEffect, useState } from "react";
 import { submitContactForm } from "./api/apiservice";
 
-const BASE_PATH = "/velocity_webtech_solution";
+const BASE_PATH = "";
 
 const services = [
   {

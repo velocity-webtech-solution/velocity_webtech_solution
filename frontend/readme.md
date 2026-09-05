@@ -275,10 +275,10 @@ The static output is created in:
 /var/www/velocity_webtech/frontend/out
 ```
 
-This project uses the base path:
+This project is served from the domain root:
 
 ```text
-/velocity_webtech_solution
+/
 ```
 
 ## 9. Production Nginx Config
@@ -301,16 +301,12 @@ server {
     root /var/www/velocity_webtech/frontend/out;
     index index.html;
 
-    location = / {
-        return 302 /velocity_webtech_solution/;
-    }
-
     location /api/static/ {
         alias /var/www/velocity_webtech/server/staticfiles/;
     }
 
-    location /velocity_webtech_solution/api/admin/ {
-        proxy_pass http://127.0.0.1:8000/velocity_webtech_solution/api/admin/;
+    location /api/admin/ {
+        proxy_pass http://127.0.0.1:8000/api/admin/;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -325,8 +321,8 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
-    location /velocity_webtech_solution/ {
-        try_files $uri $uri/ /velocity_webtech_solution/index.html;
+    location / {
+        try_files $uri $uri/ /index.html;
     }
 }
 ```
@@ -353,8 +349,8 @@ sudo systemctl restart nginx
 Test site:
 
 ```bash
-curl -I http://127.0.0.1/velocity_webtech_solution/
-curl -I http://13.201.101.168/velocity_webtech_solution/
+curl -I http://127.0.0.1/
+curl -I http://13.201.101.168/
 ```
 
 ## 10. Namecheap DNS Setup
@@ -429,14 +425,14 @@ When asked about HTTP to HTTPS redirect, choose redirect option if shown.
 Test HTTPS:
 
 ```bash
-curl -I https://velocitywebtechsolution.com/velocity_webtech_solution/
-curl -I https://www.velocitywebtechsolution.com/velocity_webtech_solution/
+curl -I https://velocitywebtechsolution.com/
+curl -I https://www.velocitywebtechsolution.com/
 ```
 
 Open:
 
 ```text
-https://velocitywebtechsolution.com/velocity_webtech_solution/
+https://velocitywebtechsolution.com/
 ```
 
 Test renewal:
@@ -450,49 +446,49 @@ sudo certbot renew --dry-run
 Website:
 
 ```text
-https://velocitywebtechsolution.com/velocity_webtech_solution/
+https://velocitywebtechsolution.com/
 ```
 
 About section:
 
 ```text
-https://velocitywebtechsolution.com/velocity_webtech_solution/#about
+https://velocitywebtechsolution.com/#about
 ```
 
 Contact section:
 
 ```text
-https://velocitywebtechsolution.com/velocity_webtech_solution/#contact
+https://velocitywebtechsolution.com/#contact
 ```
 
 Admin enquiries:
 
 ```text
-https://velocitywebtechsolution.com/velocity_webtech_solution/admin/enquiries/
+https://velocitywebtechsolution.com/admin/enquiries/
 ```
 
 Django admin:
 
 ```text
-https://velocitywebtechsolution.com/velocity_webtech_solution/api/admin/
+https://velocitywebtechsolution.com/api/admin/
 ```
 
 Services pricing overview:
 
 ```text
-https://velocitywebtechsolution.com/velocity_webtech_solution/services-pricing/
+https://velocitywebtechsolution.com/services-pricing/
 ```
 
 Individual pricing pages:
 
 ```text
-https://velocitywebtechsolution.com/velocity_webtech_solution/website-development-services-pricing/
-https://velocitywebtechsolution.com/velocity_webtech_solution/mobile-app-development-services-pricing/
-https://velocitywebtechsolution.com/velocity_webtech_solution/custom-software-development-services-pricing/
-https://velocitywebtechsolution.com/velocity_webtech_solution/e-commerce-development-services-pricing/
-https://velocitywebtechsolution.com/velocity_webtech_solution/ui-ux-design-services-pricing/
-https://velocitywebtechsolution.com/velocity_webtech_solution/api-backend-development-services-pricing/
-https://velocitywebtechsolution.com/velocity_webtech_solution/cloud-deployment-services-pricing/
+https://velocitywebtechsolution.com/website-development-services-pricing/
+https://velocitywebtechsolution.com/mobile-app-development-services-pricing/
+https://velocitywebtechsolution.com/custom-software-development-services-pricing/
+https://velocitywebtechsolution.com/e-commerce-development-services-pricing/
+https://velocitywebtechsolution.com/ui-ux-design-services-pricing/
+https://velocitywebtechsolution.com/api-backend-development-services-pricing/
+https://velocitywebtechsolution.com/cloud-deployment-services-pricing/
 ```
 
 ## 13. Deploy Updates After Code Changes

@@ -1,6 +1,6 @@
 import "./globals.css";
 
-const basePath = "/velocity_webtech_solution";
+const basePath = "";
 
 export const metadata = {
   title: "Velocity Webtech Solution",

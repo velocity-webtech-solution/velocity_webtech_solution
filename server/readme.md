@@ -131,7 +131,7 @@ Backend URLs:
 
 - API base: `http://127.0.0.1:8000/api/velocity-webtech/`
 - Contact submissions API: `http://127.0.0.1:8000/api/velocity-webtech/contact-submissions/`
-- Django admin: `http://127.0.0.1:8000/velocity_webtech_solution/api/admin/`
+- Django admin: `http://127.0.0.1:8000/api/admin/`
 
 ## Frontend Setup
 
@@ -152,7 +152,7 @@ Optional: create `frontend/.env.local` if you want to override API URLs:
 ```env
 NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000/api/velocity-webtech
 NEXT_PUBLIC_ACCOUNTS_API_BASE_URL=http://127.0.0.1:8000/api/accounts
-NEXT_PUBLIC_DJANGO_ADMIN_URL=http://127.0.0.1:8000/velocity_webtech_solution/api/admin/
+NEXT_PUBLIC_DJANGO_ADMIN_URL=http://127.0.0.1:8000/api/admin/
 ```
 
 ## Run Frontend Development Server
@@ -163,16 +163,16 @@ npm run dev
 
 Frontend URLs:
 
-- Website: `http://localhost:3000/velocity_webtech_solution/`
-- Admin enquiries page: `http://localhost:3000/velocity_webtech_solution/admin/enquiries/`
-- Services pricing overview: `http://localhost:3000/velocity_webtech_solution/services-pricing/`
-- Website pricing page: `http://localhost:3000/velocity_webtech_solution/website-development-services-pricing/`
-- Mobile app pricing page: `http://localhost:3000/velocity_webtech_solution/mobile-app-development-services-pricing/`
-- Custom software pricing page: `http://localhost:3000/velocity_webtech_solution/custom-software-development-services-pricing/`
-- E-commerce pricing page: `http://localhost:3000/velocity_webtech_solution/e-commerce-development-services-pricing/`
-- UI/UX pricing page: `http://localhost:3000/velocity_webtech_solution/ui-ux-design-services-pricing/`
-- API/backend pricing page: `http://localhost:3000/velocity_webtech_solution/api-backend-development-services-pricing/`
-- Cloud/deployment pricing page: `http://localhost:3000/velocity_webtech_solution/cloud-deployment-services-pricing/`
+- Website: `http://localhost:3000/`
+- Admin enquiries page: `http://localhost:3000/admin/enquiries/`
+- Services pricing overview: `http://localhost:3000/services-pricing/`
+- Website pricing page: `http://localhost:3000/website-development-services-pricing/`
+- Mobile app pricing page: `http://localhost:3000/mobile-app-development-services-pricing/`
+- Custom software pricing page: `http://localhost:3000/custom-software-development-services-pricing/`
+- E-commerce pricing page: `http://localhost:3000/e-commerce-development-services-pricing/`
+- UI/UX pricing page: `http://localhost:3000/ui-ux-design-services-pricing/`
+- API/backend pricing page: `http://localhost:3000/api-backend-development-services-pricing/`
+- Cloud/deployment pricing page: `http://localhost:3000/cloud-deployment-services-pricing/`
 
 ## Build Frontend
 
@@ -203,7 +203,7 @@ npm run start
 Then open:
 
 ```text
-http://localhost:3000/velocity_webtech_solution/
+http://localhost:3000/
 ```
 
 ## Email Setup Notes
@@ -306,8 +306,8 @@ If emails are not sending:
 
 If Django admin is not opening:
 
-- Use `http://127.0.0.1:8000/velocity_webtech_solution/api/admin/`.
-- From frontend, use `http://localhost:3000/velocity_webtech_solution/api/admin/` to redirect to Django admin.
+- Use `http://127.0.0.1:8000/api/admin/`.
+- From frontend, use `http://localhost:3000/api/admin/` to redirect to Django admin.
 
 If port `3000` is busy:
 

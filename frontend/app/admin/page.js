@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { adminLogin } from "../api/apiservice";
 
-const BASE_PATH = "/velocity_webtech_solution";
+const BASE_PATH = "";
 
 export default function AdminLoginPage() {
   const router = useRouter();

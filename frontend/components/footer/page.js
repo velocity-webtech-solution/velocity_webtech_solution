@@ -1,13 +1,13 @@
 import Image from "next/image";
 
-const BASE_PATH = "/velocity_webtech_solution";
+const BASE_PATH = "";
 
 const navItems = [
-  { label: "Home", href: `${BASE_PATH}#home` },
-  { label: "Services", href: `${BASE_PATH}#services` },
-  { label: "About", href: `${BASE_PATH}#about` },
-  // { label: "Portfolio", href: `${BASE_PATH}#portfolio` },
-  { label: "Contact Us", href: `${BASE_PATH}#contact` },
+  { label: "Home", href: "/#home" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
+  // { label: "Portfolio", href: "/#portfolio" },
+  { label: "Contact Us", href: "/#contact" },
 ];
 
 export default function Footer() {
@@ -41,10 +41,10 @@ export default function Footer() {
 
         <div className="footer-column">
           <h4>Services</h4>
-          <a href={`${BASE_PATH}#services`}>Website Development</a>
-          <a href={`${BASE_PATH}#services`}>Mobile App Development</a>
-          <a href={`${BASE_PATH}#services`}>Custom Software</a>
-          <a href={`${BASE_PATH}#services`}>E-commerce</a>
+          <a href="/#services">Website Development</a>
+          <a href="/#services">Mobile App Development</a>
+          <a href="/#services">Custom Software</a>
+          <a href="/#services">E-commerce</a>
         </div>
 
         <div className="footer-column">

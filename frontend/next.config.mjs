@@ -17,8 +17,6 @@ const nextConfig = {
   experimental: {
     devtoolSegmentExplorer: false,
   },
-
-  basePath: "/velocity_webtech_solution",
 };
 
 export default nextConfig;

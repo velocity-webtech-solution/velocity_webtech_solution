@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 import { Menu, MessageCircle, X } from "lucide-react";
 import { useState } from "react";
 
-const BASE_PATH = "/velocity_webtech_solution";
+const BASE_PATH = "";
 
 const navItems = [
-  { label: "Home", href: `${BASE_PATH}#home` },
-  { label: "Services", href: `${BASE_PATH}#services` },
-  { label: "About", href: `${BASE_PATH}#about` },
-  // { label: "Portfolio", href: `${BASE_PATH}#portfolio` },
-  { label: "Contact Us", href: `${BASE_PATH}#contact` },
+  { label: "Home", href: "/#home" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
+  // { label: "Portfolio", href: "/#portfolio" },
+  { label: "Contact Us", href: "/#contact" },
 ];
 
 export default function Header() {
@@ -59,7 +59,7 @@ export default function Header() {
     <header className="site-header">
       <a
         className="brand"
-        href={`${BASE_PATH}#home`}
+        href="/#home"
         aria-label="Velocity Webtech Solution home"
       >
         <div className="brand-logo">
@@ -90,8 +90,8 @@ export default function Header() {
 
       {/* <motion.a
         className="header-cta"
-        href={`${BASE_PATH}#contact`}
-        onClick={(event) => handleNavClick(event, `${BASE_PATH}#contact`)}
+        href="/#contact"
+        onClick={(event) => handleNavClick(event, "/#contact")}
         whileHover={{ y: -2, scale: 1.02 }}
         whileTap={{ scale: 0.96 }}
       >

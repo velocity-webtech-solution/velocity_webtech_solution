@@ -83,7 +83,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="admin-action-list">
-            <a href="/velocity_webtech_solution/admin/enquiries/">
+            <a href="/admin/enquiries/">
               <span>
                 <Mail size={19} />
               </span>
@@ -103,7 +103,7 @@ export default function AdminDashboardPage() {
               </div>
               <ArrowUpRight size={17} />
             </a>
-            <a href="/velocity_webtech_solution/">
+            <a href="/">
               <span>
                 <Home size={19} />
               </span>

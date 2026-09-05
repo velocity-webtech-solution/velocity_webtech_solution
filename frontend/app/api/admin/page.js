@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 const DJANGO_ADMIN_URL =
   process.env.NEXT_PUBLIC_DJANGO_ADMIN_URL ||
-  "http://127.0.0.1:8000/velocity_webtech_solution/api/admin/";
+  "http://127.0.0.1:8000/api/admin/";
 
 export default function DjangoAdminRedirectPage() {
   useEffect(() => {

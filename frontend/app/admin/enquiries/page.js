@@ -32,7 +32,7 @@ import {
   fetchEnquiryReplyHistoryByEmail,
 } from "../../api/apiservice";
 
-const BASE_PATH = "/velocity_webtech_solution";
+const BASE_PATH = "";
 const PAGE_SIZE = 10;
 
 const leadSteps = ["New", "Contacted", "Qualified", "Proposal", "Converted"];
