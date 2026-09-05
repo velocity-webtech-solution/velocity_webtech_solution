@@ -8,6 +8,8 @@ import {
   ArrowRight,
   ArrowUp,
   BadgeCheck,
+  BookOpenCheck,
+  BriefcaseBusiness,
   ChevronLeft,
   ChevronRight,
   Code2,
@@ -21,6 +23,7 @@ import {
   Phone,
   Rocket,
   Server,
+  Settings,
   ShieldCheck,
   ShoppingCart,
   Smartphone,
@@ -36,52 +39,73 @@ const BASE_PATH = "";
 const services = [
   {
     title: "Website Development",
-    text: "Responsive, fast, and SEO-friendly websites and web applications.",
+    text: "Professional, responsive, and SEO-friendly websites for business growth.",
     icon: Globe2,
     tone: "blue",
-    path: "/website-development-services-pricing/",
+    path: "/website-development-services/",
+  },
+  {
+    title: "E-commerce Development",
+    text: "Online stores with product management, checkout, and secure payments.",
+    icon: ShoppingCart,
+    tone: "orange",
+    path: "/e-commerce-development-services/",
   },
   {
     title: "Mobile App Development",
-    text: "Modern Android and iOS applications with smooth user experiences.",
+    text: "Modern Android and iOS apps with smooth customer experiences.",
     icon: Smartphone,
     tone: "green",
-    path: "/mobile-app-development-services-pricing/",
+    path: "/mobile-app-development-services/",
   },
   {
     title: "Custom Software Development",
     text: "Business-specific software solutions and automation systems.",
     icon: Code2,
     tone: "violet",
-    path: "/custom-software-development-services-pricing/",
+    path: "/custom-software-development-services/",
   },
   {
-    title: "E-commerce Development",
-    text: "Powerful online stores with secure payment integration.",
-    icon: ShoppingCart,
-    tone: "orange",
-    path: "/e-commerce-development-services-pricing/",
-  },
-  {
-    title: "UI/UX Design",
-    text: "Clean, attractive, and user-friendly digital experiences.",
-    icon: Layers3,
+    title: "CRM / ERP / Business Management Systems",
+    text: "Centralized systems for leads, operations, teams, billing, and reporting.",
+    icon: BriefcaseBusiness,
     tone: "cyan",
-    path: "/ui-ux-design-services-pricing/",
+    path: "/crm-erp-business-management-systems-services/",
   },
   {
     title: "API & Backend Development",
     text: "Secure and scalable APIs, databases, and backend systems.",
     icon: Server,
     tone: "indigo",
-    path: "/api-backend-development-services-pricing/",
+    path: "/api-backend-development-services/",
   },
   {
-    title: "Cloud & Deployment Services",
-    text: "Deployment, hosting, maintenance, and cloud solutions.",
+    title: "Cloud Hosting / Deployment",
+    text: "Cloud setup, hosting configuration, deployment, and launch support.",
     icon: Cloud,
     tone: "sky",
-    path: "/cloud-deployment-services-pricing/",
+    path: "/cloud-deployment-services/",
+  },
+  {
+    title: "Website & Software Maintenance",
+    text: "Ongoing updates, fixes, security checks, backups, and technical support.",
+    icon: Settings,
+    tone: "blue",
+    path: "/website-software-maintenance-services/",
+  },
+  {
+    title: "Domain/Hosting Assistance",
+    text: "Guidance for domain purchase, DNS setup, hosting, SSL, and email setup.",
+    icon: Database,
+    tone: "orange",
+    path: "/domain-hosting-assistance-services/",
+  },
+  {
+    title: "Software Training",
+    text: "Practical training for software tools, admin panels, and digital workflows.",
+    icon: BookOpenCheck,
+    tone: "green",
+    path: "/software-training-services/",
   },
 ];
 
@@ -527,7 +551,7 @@ export default function Home() {
         >
           <p className="eyebrow">
             <Zap size={18} />
-            Our Services & Pricing
+            Our Services
           </p>
           <h2>
             From idea to launch, we turn your vision into powerful digital
@@ -848,7 +872,7 @@ export default function Home() {
                 <Phone size={22} />
                 +91 6291499409
               </a>
-              <a>
+              <a className="contact-email-link">
                 <Mail size={22} />
                 subhankar.rc@velocitywebtechsolution.com
               </a>

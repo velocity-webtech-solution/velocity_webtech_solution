@@ -1379,6 +1379,100 @@ h2 {
   color: var(--muted);
   font-size: 1.05rem;
   font-weight: 800;
+  line-height: 1.55;
+}
+
+.service-story-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(39, 213, 255, 0.12), transparent 30%),
+    radial-gradient(circle at 88% 18%, rgba(255, 145, 0, 0.1), transparent 30%),
+    linear-gradient(180deg, #020a17, #04142c);
+}
+
+.service-story-section::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background-image:
+    linear-gradient(rgba(93, 188, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(93, 188, 255, 0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+}
+
+.service-story-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.48fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.service-story-copy,
+.service-audience-card {
+  min-width: 0;
+  border: 1px solid rgba(93, 188, 255, 0.24);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(8, 31, 70, 0.86), rgba(3, 13, 31, 0.94)),
+    rgba(4, 18, 42, 0.9);
+  box-shadow: 0 24px 58px rgba(0, 0, 0, 0.26);
+}
+
+.service-story-copy {
+  padding: clamp(24px, 4vw, 42px);
+}
+
+.service-story-copy h2 {
+  max-width: 760px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.service-story-copy p:not(.eyebrow) {
+  max-width: 860px;
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 1.06rem;
+  line-height: 1.75;
+}
+
+.service-audience-card {
+  display: grid;
+  align-content: center;
+  gap: 16px;
+  padding: 30px;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(255, 145, 0, 0.17), transparent 34%),
+    linear-gradient(145deg, rgba(8, 31, 70, 0.9), rgba(3, 13, 31, 0.96));
+}
+
+.service-audience-card > span {
+  display: inline-grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 8px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--orange), #ffbd2d);
+  box-shadow: 0 16px 34px rgba(255, 145, 0, 0.24);
+}
+
+.service-audience-card h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.45rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.service-audience-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
 }
 
 .service-pricing-section {
@@ -1442,6 +1536,51 @@ h2 {
 .service-work-panel svg {
   flex: 0 0 auto;
   color: var(--orange);
+}
+
+.service-choice-section {
+  background:
+    linear-gradient(rgba(93, 188, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(93, 188, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, #061b39, #020a17);
+  background-size:
+    96px 96px,
+    96px 96px,
+    auto;
+}
+
+.service-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.service-choice-grid article {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: 86px;
+  padding: 18px;
+  border: 1px solid rgba(93, 188, 255, 0.24);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(8, 31, 70, 0.88), rgba(3, 13, 31, 0.94)),
+    rgba(4, 18, 42, 0.9);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+}
+
+.service-choice-grid article svg {
+  flex: 0 0 auto;
+  color: var(--orange);
+}
+
+.service-choice-grid article strong {
+  min-width: 0;
+  color: #ffffff;
+  font-size: 0.98rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .about-section {
@@ -2555,6 +2694,10 @@ h2 {
     background-color 180ms ease;
 }
 
+.contact-actions .contact-email-link {
+  white-space: nowrap;
+}
+
 .contact-actions a:hover {
   transform: translateY(-3px);
   border-color: rgba(39, 213, 255, 0.72);
@@ -2825,7 +2968,8 @@ h2 {
   }
 
   .service-pricing-hero,
-  .service-pricing-layout {
+  .service-pricing-layout,
+  .service-story-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2856,7 +3000,8 @@ h2 {
   }
 
   .pricing-highlight-grid,
-  .pricing-strip {
+  .pricing-strip,
+  .service-choice-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -3075,7 +3220,8 @@ h2 {
   .pricing-strip,
   .pricing-highlight-grid,
   .pricing-contact-band,
-  .pricing-grid {
+  .pricing-grid,
+  .service-choice-grid {
     grid-template-columns: 1fr;
   }
 
@@ -3120,6 +3266,21 @@ h2 {
 
   .service-work-panel {
     padding: 22px;
+  }
+
+  .service-story-copy,
+  .service-audience-card {
+    padding: 22px;
+  }
+
+  .service-story-copy p:not(.eyebrow),
+  .service-audience-card p {
+    font-size: 1rem;
+    line-height: 1.62;
+  }
+
+  .service-choice-grid article {
+    min-height: 76px;
   }
 
   .pricing-growth-band,
@@ -3430,6 +3591,7 @@ h2 {
 
   .contact-actions a {
     width: 100%;
+    font-size: clamp(0.78rem, 3.45vw, 1rem);
     overflow-wrap: anywhere;
   }
 
@@ -3484,7 +3646,9 @@ h2 {
 
   .pricing-card-body,
   .service-work-panel,
-  .service-pricing-summary {
+  .service-pricing-summary,
+  .service-story-copy,
+  .service-audience-card {
     padding: 18px;
   }
 

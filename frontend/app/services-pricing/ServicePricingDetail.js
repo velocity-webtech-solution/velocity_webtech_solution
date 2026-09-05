@@ -73,18 +73,20 @@ export default function ServicePricingDetail({ serviceId }) {
             <Sparkles size={18} />
             {service.eyebrow}
           </motion.p>
-          <motion.h1 variants={fadeUp}>{service.title}</motion.h1>
+          <motion.h2 variants={fadeUp}>{service.title}</motion.h2>
           <motion.p className="pricing-hero-copy" variants={fadeUp}>
             {service.text}
           </motion.p>
           <motion.div className="pricing-hero-actions" variants={fadeUp}>
             <a className="primary-button" href={`${BASE_PATH}/#contact`}>
-              Build With Us
+              {service.cta ? "Contact Us Today" : "Build With Us"}
               <ArrowRight size={18} />
             </a>
-            <a className="secondary-button" href="#pricing">
-              View Pricing
-            </a>
+            {!service.hidePricingDetails ? (
+              <a className="secondary-button" href="#pricing">
+                View Pricing
+              </a>
+            ) : null}
           </motion.div>
         </motion.div>
 
@@ -99,81 +101,153 @@ export default function ServicePricingDetail({ serviceId }) {
             <Icon size={34} />
           </span>
           <strong>{service.title}</strong>
-          <p>{service.items[0][1]}</p>
+          <p>{service.startingPrice || service.items[0][1]}</p>
         </motion.div>
       </section>
 
-      <section id="pricing" className="section service-pricing-section">
-        <motion.div
-          className="section-heading centered"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-        >
-          <p className="eyebrow">
-            <Icon size={18} />
-            Pricing Details
-          </p>
-          <h2>{service.title} packages for your business.</h2>
-        </motion.div>
-
-        <div className="service-pricing-layout">
-          <motion.article
-            className={`pricing-card service-pricing-main-card ${service.tone}`}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+      {service.intro ? (
+        <section className="section service-story-section">
+          <motion.div
+            className="service-story-grid"
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45 }}
+            variants={staggerGroup}
           >
-            <div className="pricing-card-media">
-              <span className="pricing-number">{service.number}</span>
-              <span className="service-icon">
-                <Icon size={32} />
-              </span>
-            </div>
-            <div className="pricing-card-body">
-              <h3>{service.title}</h3>
-              <ul>
-                {service.items.map(([label, price]) => (
-                  <li key={label}>
-                    <span>
-                      <CheckCircle2 size={16} />
-                      {label}
-                    </span>
-                    <strong>{price}</strong>
-                  </li>
-                ))}
-              </ul>
-              <p>{service.text}</p>
-              <a className="pricing-card-cta" href={`${BASE_PATH}/#contact`}>
-                Get Started Today
-                <ArrowRight size={17} />
-              </a>
-            </div>
-          </motion.article>
+            <motion.div className="service-story-copy" variants={fadeUp}>
+              <p className="eyebrow">
+                <Icon size={18} />
+                Tailored For Your Business
+              </p>
+              <h2>
+                {service.storyTitle ||
+                  "Modern websites that look sharp and work hard."}
+              </h2>
+              <p>{service.intro}</p>
+            </motion.div>
 
-          <aside className="service-work-panel">
-            <h3>What this work includes</h3>
-            <div>
-              {service.deliverables.map((item) => (
-                <span key={item}>
-                  <CheckCircle2 size={16} />
-                  {item}
+            <motion.div className="service-audience-card" variants={fadeUp}>
+              <span>
+                <Sparkles size={24} />
+              </span>
+              <h3>{service.audienceTitle || "Built for real business goals"}</h3>
+              <p>{service.audience}</p>
+            </motion.div>
+          </motion.div>
+        </section>
+      ) : null}
+
+      {!service.hidePricingDetails ? (
+        <section id="pricing" className="section service-pricing-section">
+          <motion.div
+            className="section-heading centered"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <p className="eyebrow">
+              <Icon size={18} />
+              Pricing Details
+            </p>
+            <h2>{service.title} packages for your business.</h2>
+          </motion.div>
+
+          <div className="service-pricing-layout">
+            <motion.article
+              className={`pricing-card service-pricing-main-card ${service.tone}`}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45 }}
+            >
+              <div className="pricing-card-media">
+                <span className="pricing-number">{service.number}</span>
+                <span className="service-icon">
+                  <Icon size={32} />
                 </span>
-              ))}
-            </div>
-          </aside>
-        </div>
-      </section>
+              </div>
+              <div className="pricing-card-body">
+                <h3>{service.title}</h3>
+                <ul>
+                  {service.items.map(([label, price]) => (
+                    <li key={label}>
+                      <span>
+                        <CheckCircle2 size={16} />
+                        {label}
+                      </span>
+                      <strong>{price}</strong>
+                    </li>
+                  ))}
+                </ul>
+                <p>{service.text}</p>
+                <a className="pricing-card-cta" href={`${BASE_PATH}/#contact`}>
+                  Get Started Today
+                  <ArrowRight size={17} />
+                </a>
+              </div>
+            </motion.article>
+
+            <aside className="service-work-panel">
+              <h3>What this work includes</h3>
+              <div>
+                {service.deliverables.map((item) => (
+                  <span key={item}>
+                    <CheckCircle2 size={16} />
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </aside>
+          </div>
+        </section>
+      ) : null}
+
+      {service.whyChoose ? (
+        <section className="section service-choice-section">
+          <motion.div
+            className="section-heading centered"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <p className="eyebrow">
+              <CheckCircle2 size={18} />
+              Why Choose Velocity Webtech Solution?
+            </p>
+            <h2>
+              {service.choiceTitle ||
+                "Clear design, clean development, and support after launch."}
+            </h2>
+          </motion.div>
+
+          <motion.div
+            className="service-choice-grid"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.18 }}
+            variants={staggerGroup}
+          >
+            {service.whyChoose.map((item) => (
+              <motion.article key={item} variants={fadeUp}>
+                <CheckCircle2 size={20} />
+                <strong>{item}</strong>
+              </motion.article>
+            ))}
+          </motion.div>
+        </section>
+      ) : null}
 
       <section className="pricing-growth-band">
         <div>
           <Rocket size={42} />
-          <h2>Built for performance. Designed for growth.</h2>
+          <h2>
+            {service.cta || "Built for performance. Designed for growth."}
+          </h2>
         </div>
         <a className="primary-button" href={`${BASE_PATH}/#contact`}>
-          Get Started Today
+          Contact Velocity For Your Enquiry
           <ArrowRight size={18} />
         </a>
       </section>
