@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['*','13.201.101.168','localhost','127.0.0.1','velocitywebtechsolution.com','www.velocitywebtechsolution.com']
+ALLOWED_HOSTS = ['*','54.165.235.50','localhost','127.0.0.1','velocitywebtechsolution.com','www.velocitywebtechsolution.com']
 
 
 CORS_ORIGIN_WHITELIST = [
@@ -46,7 +46,7 @@ USE_X_FORWARDED_HOST = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # ✅ Allows Next.js local development
-    "http://13.201.101.168",
+    "http://54.165.235.50",
     "http://velocitywebtechsolution.com",
     "http://www.velocitywebtechsolution.com",
     "https://velocitywebtechsolution.com",
@@ -78,7 +78,7 @@ CORS_ALLOW_HEADERS = [
 ]
 # 3.
 CSRF_TRUSTED_ORIGINS = [
-   "http://13.201.101.168",
+   "http://54.165.235.50",
    "http://localhost:3000",
    "http://127.0.0.1:3000",
    "http://127.0.0.1:8000",
