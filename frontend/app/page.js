@@ -197,7 +197,7 @@ const testimonialImage = (fileName) =>
 const testimonials = [
   {
     name: "Subhradeep Das",
-    role: "Founder",
+    role: "Owner",
     company: "Favhost",
     image: testimonialImage("thumbnail_new.jpg"),
     logo: testimonialImage("favhost_logo.png"),
