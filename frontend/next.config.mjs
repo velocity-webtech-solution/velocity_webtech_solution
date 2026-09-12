@@ -11,6 +11,7 @@
 const nextConfig = {
   output: "export",
   trailingSlash: true,
+  allowedDevOrigins: ["0.0.0.0:84", "localhost:84", "127.0.0.1:84"],
   images: {
     unoptimized: true,
   },

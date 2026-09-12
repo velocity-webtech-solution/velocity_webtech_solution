@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Header from "../components/header/page";
 import Footer from "../components/footer/page";
 import {
@@ -28,6 +28,7 @@ import {
   ShoppingCart,
   Smartphone,
   Sparkles,
+  Quote,
   Users,
   Zap,
 } from "lucide-react";
@@ -190,6 +191,39 @@ const aboutMetrics = [
   { value: "03", label: "Reliable launch" },
 ];
 
+const testimonialImage = (fileName) =>
+  `${BASE_PATH}/image/testimonial/favhost/${fileName}`;
+
+const testimonials = [
+  {
+    name: "Subhradeep Das",
+    role: "Founder",
+    company: "Favhost",
+    image: testimonialImage("thumbnail_new.jpg"),
+    logo: testimonialImage("favhost_logo.png"),
+    quote:
+      "Working with Velocity Webtech Solution on Favhost.com was an outstanding experience from start to finish.They expertly developed a powerful rental channel manager with multi-calendar synchronization and real-time API integrations.Their deep expertise in cloud infrastructure delivered a fast, scalable, and highly reliable platform.Highly responsive and professional, they consistently delivered clean code on time — highly recommended for complex web applications.",
+  },
+  // {
+  //   name: "Ananya Sen",
+  //   role: "Operations Lead",
+  //   company: "Retail Growth Partner",
+  //   image: "",
+  //   logo: "",
+  //   quote:
+  //     "The team understood our workflow quickly and turned a scattered process into a simple digital system. Communication stayed clear and delivery was smooth.",
+  // },
+  // {
+  //   name: "Rahul Mehta",
+  //   role: "Business Owner",
+  //   company: "Cloud Service Client",
+  //   image: "",
+  //   logo: "",
+  //   quote:
+  //     "From design to deployment, they kept the project focused on real business needs. Our new website is responsive, easy to manage, and ready for growth.",
+  // },
+];
+
 const developerImage = (fileName) =>
   `${BASE_PATH}/image/developers/${fileName}`;
 
@@ -259,11 +293,64 @@ export default function Home() {
     message: "",
   });
   const [submitting, setSubmitting] = useState(false);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [testimonialDirection, setTestimonialDirection] = useState(1);
+  const [testimonialSlideCycle, setTestimonialSlideCycle] = useState(0);
   const [activeDeveloper, setActiveDeveloper] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const testimonialCount = testimonials.length;
+  const hasMultipleTestimonials = testimonialCount > 1;
+  const lastTestimonialIndex = Math.max(testimonialCount - 1, 0);
+  const activeTestimonialIndex = Math.min(
+    activeTestimonial,
+    lastTestimonialIndex,
+  );
+  const activeTestimonialData = testimonials[activeTestimonialIndex];
   const developerCount = developers.length;
   const lastDeveloperIndex = Math.max(developerCount - 1, 0);
   const activeDeveloperIndex = Math.min(activeDeveloper, lastDeveloperIndex);
+
+  function showPreviousTestimonial() {
+    if (!hasMultipleTestimonials) {
+      return;
+    }
+
+    setTestimonialDirection(-1);
+    setTestimonialSlideCycle((current) => current + 1);
+    setActiveTestimonial((current) => {
+      if (testimonialCount === 0) {
+        return 0;
+      }
+
+      return current === 0 ? lastTestimonialIndex : current - 1;
+    });
+  }
+
+  function showNextTestimonial() {
+    if (!hasMultipleTestimonials) {
+      return;
+    }
+
+    setTestimonialDirection(1);
+    setTestimonialSlideCycle((current) => current + 1);
+    setActiveTestimonial((current) => {
+      if (testimonialCount === 0) {
+        return 0;
+      }
+
+      return current >= lastTestimonialIndex ? 0 : current + 1;
+    });
+  }
+
+  function showTestimonial(index) {
+    if (!hasMultipleTestimonials || index === activeTestimonialIndex) {
+      return;
+    }
+
+    setTestimonialDirection(index >= activeTestimonialIndex ? 1 : -1);
+    setTestimonialSlideCycle((current) => current + 1);
+    setActiveTestimonial(index);
+  }
 
   function showPreviousDeveloper() {
     setActiveDeveloper((current) => {
@@ -322,6 +409,36 @@ export default function Home() {
       current > lastDeveloperIndex ? lastDeveloperIndex : current,
     );
   }, [lastDeveloperIndex]);
+
+  useEffect(() => {
+    setActiveTestimonial((current) =>
+      current > lastTestimonialIndex ? lastTestimonialIndex : current,
+    );
+  }, [lastTestimonialIndex]);
+
+  useEffect(() => {
+    if (testimonialCount <= 1) {
+      return undefined;
+    }
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion) {
+      return undefined;
+    }
+
+    const slideTimer = window.setInterval(() => {
+      setTestimonialDirection(1);
+      setTestimonialSlideCycle((current) => current + 1);
+      setActiveTestimonial((current) =>
+        current >= lastTestimonialIndex ? 0 : current + 1,
+      );
+    }, 4200);
+
+    return () => window.clearInterval(slideTimer);
+  }, [testimonialCount, lastTestimonialIndex]);
 
   useEffect(() => {
     if (developerCount === 0) {
@@ -692,6 +809,164 @@ export default function Home() {
             Cloud Ready
           </motion.div>
         </motion.div>
+      </section>
+
+      <section id="testimonials" className="section testimonials-section">
+        <motion.div
+          className="testimonials-heading"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+        >
+          <p className="testimonial-pill">Client Testimonials</p>
+          <h2>
+            Trusted <span>by Clients</span>
+          </h2>
+          <p>
+            Real feedback from businesses that trusted Velocity Webtech Solution
+            for design, development, deployment, and long-term support.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="testimonial-card-viewport testimonial-card-slider"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.55 }}
+        >
+          <button
+            className="testimonial-nav testimonial-nav-prev"
+            type="button"
+            onClick={showPreviousTestimonial}
+            disabled={!hasMultipleTestimonials}
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          <div className="testimonial-carousel-stage">
+            <AnimatePresence initial={false} custom={testimonialDirection}>
+              {activeTestimonialData && (
+                <motion.article
+                  className="testimonial-feature-card testimonial-slide-active"
+                  key={`${activeTestimonialData.name}-${testimonialSlideCycle}`}
+                  custom={testimonialDirection}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  variants={{
+                    enter: (direction) => ({
+                      x: direction > 0 ? "115%" : "-115%",
+                      scale: 0.96,
+                      opacity: 0,
+                      zIndex: 2,
+                    }),
+                    center: {
+                      x: 0,
+                      scale: 1,
+                      opacity: 1,
+                      zIndex: 3,
+                    },
+                    exit: (direction) => ({
+                      x: direction > 0 ? "-115%" : "115%",
+                      scale: 0.96,
+                      opacity: 0,
+                      zIndex: 2,
+                    }),
+                  }}
+                  transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <div className="testimonial-panel-frame">
+                    <div className="testimonial-panel">
+                      <Quote
+                        className="testimonial-quote-mark quote-left"
+                        size={34}
+                      />
+                      <Quote
+                        className="testimonial-quote-mark quote-right"
+                        size={34}
+                      />
+                      <div className="testimonial-card-top">
+                        <div className="testimonial-client">
+                          {activeTestimonialData.image ? (
+                            <Image
+                              src={activeTestimonialData.image}
+                              alt={`${activeTestimonialData.name} profile`}
+                              width={160}
+                              height={160}
+                              sizes="(max-width: 760px) 114px, 142px"
+                            />
+                          ) : (
+                            <span className="testimonial-avatar-fallback">
+                              {activeTestimonialData.name
+                                .split(" ")
+                                .map((part) => part[0])
+                                .join("")}
+                            </span>
+                          )}
+                          <div>
+                            <strong>{activeTestimonialData.name}</strong>
+                            <small>{activeTestimonialData.role}</small>
+                            <span className="testimonial-company-name">
+                              {activeTestimonialData.company}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="testimonial-quote-body">
+                        <p>{activeTestimonialData.quote}</p>
+                      </div>
+
+                      <div className="testimonial-client-logo">
+                        {activeTestimonialData.logo ? (
+                          <Image
+                            src={activeTestimonialData.logo}
+                            alt={`${activeTestimonialData.company} logo`}
+                            width={220}
+                            height={104}
+                          />
+                        ) : (
+                          <span>{activeTestimonialData.company}</span>
+                        )}
+                      </div>
+
+                      {/* <div className="testimonial-card-footer">
+                      <span>Learn More</span>
+                    </div> */}
+                    </div>
+                  </div>
+                </motion.article>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <button
+            className="testimonial-nav testimonial-nav-next"
+            type="button"
+            onClick={showNextTestimonial}
+            disabled={!hasMultipleTestimonials}
+            aria-label="Next testimonial"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </motion.div>
+
+        <div className="testimonial-slider-dots" aria-label="Testimonials">
+          {testimonials.map((testimonial, index) => (
+            <button
+              key={testimonial.name}
+              className={index === activeTestimonialIndex ? "active" : ""}
+              type="button"
+              onClick={() => showTestimonial(index)}
+              disabled={!hasMultipleTestimonials}
+              aria-label={`Show testimonial from ${testimonial.name}`}
+              aria-current={index === activeTestimonialIndex}
+            />
+          ))}
+        </div>
       </section>
 
       {/* <section id="portfolio" className="section developer-portfolio-section">

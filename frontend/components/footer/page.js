@@ -2,15 +2,9 @@ import Image from "next/image";
 
 const BASE_PATH = "";
 
-const navItems = [
-  { label: "Home", href: "/#home" },
-  { label: "Services", href: "/#services" },
-  { label: "About", href: "/#about" },
-  // { label: "Portfolio", href: "/#portfolio" },
-  { label: "Contact Us", href: "/#contact" },
-];
-
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="site-footer">
       <div className="footer-inner">
@@ -31,30 +25,20 @@ export default function Footer() {
         </div>
 
         <div className="footer-column">
-          <h4>Quick Links</h4>
-          {navItems.map((item) => (
-            <a key={item.href} href={item.href}>
-              {item.label}
-            </a>
-          ))}
-        </div>
-
-        <div className="footer-column">
-          <h4>Services</h4>
-          <a href="/#services">Website Development</a>
-          <a href="/#services">Mobile App Development</a>
-          <a href="/#services">Custom Software</a>
-          <a href="/#services">E-commerce</a>
-        </div>
-
-        <div className="footer-column">
           <h4>Contact</h4>
+          <span>
+            832b, M. G. Road, Haridevpur,
+            <br />
+            West Bengal, Kolkata - 700 082
+          </span>
           <a href="tel:+916291499409">+91 6291499409</a>
-          <a>subhankar.rc@velocitywebtechsolution.com</a>
+          <a>info@velocitywebtechsolution.com</a>
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2026 Velocity Webtech Solution. All rights reserved.</span>
+        <span>
+          © {currentYear} Velocity Webtech Solution. All rights reserved.
+        </span>
         <span>Your Vision, Our Mission.</span>
       </div>
     </footer>
