@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 const BASE_PATH = "";
 
@@ -17,6 +18,14 @@ export default function Footer() {
           />
           <div>
             <h3>Velocity Webtech Solution</h3>
+            {/* <div className="footer-brand-address">
+              <MapPin size={18} aria-hidden="true" />
+              <span>
+                832b, M. G. Road, Haridevpur,
+                <br />
+                West Bengal, Kolkata - 700 082
+              </span>
+            </div> */}
             <p>
               Modern, secure, and scalable digital solutions for businesses
               ready to grow online.
@@ -25,14 +34,17 @@ export default function Footer() {
         </div>
 
         <div className="footer-column">
-          <h4>Contact</h4>
-          <span>
-            832b, M. G. Road, Haridevpur,
-            <br />
-            West Bengal, Kolkata - 700 082
-          </span>
-          <a href="tel:+916291499409">+91 6291499409</a>
-          <a>info@velocitywebtechsolution.com</a>
+          <h4>Contact Us</h4>
+          <div className="footer-contact-item">
+            <Phone size={20} aria-hidden="true" />
+            <a href="tel:+916291499409">+91 6291499409</a>
+          </div>
+          <div className="footer-contact-item">
+            <Mail size={20} aria-hidden="true" />
+            <a href="mailto:info@velocitywebtechsolution.com">
+              info@velocitywebtechsolution.com
+            </a>
+          </div>
         </div>
       </div>
       <div className="footer-bottom">

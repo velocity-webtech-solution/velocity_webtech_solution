@@ -3765,6 +3765,23 @@ h2 {
   font-size: 1.12rem;
 }
 
+.footer-brand-address {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  max-width: 390px;
+  margin-top: 8px;
+  color: #dcecff;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.footer-brand-address svg {
+  margin-top: 1px;
+  color: white;
+}
+
 .footer-brand p {
   max-width: 390px;
   margin: 6px 0 0;
@@ -3777,25 +3794,41 @@ h2 {
   display: grid;
   align-content: start;
   justify-self: end;
-  gap: 7px;
+  gap: 10px;
 }
 
 .footer-column h4 {
-  margin-bottom: 2px;
+  margin-bottom: 0;
   color: var(--orange);
   font-size: 0.96rem;
 }
 
-.footer-column a {
+.footer-contact-item {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
   color: #dcecff;
   font-size: 0.92rem;
-  line-height: 1.25;
+  line-height: 1.35;
+}
+
+.footer-contact-item svg {
+  margin-top: 1px;
+  color: white;
+  stroke-width: 2;
+}
+
+.footer-contact-item a {
+  color: #dcecff;
+  min-width: 0;
+  overflow-wrap: anywhere;
   transition:
     color 180ms ease,
     transform 180ms ease;
 }
 
-.footer-column a:hover {
+.footer-contact-item a:hover {
   color: var(--cyan);
   transform: translateX(4px);
 }
@@ -9416,7 +9449,7 @@ h2 {
 
   .testimonial-client img,
   .testimonial-avatar-fallback {
-    top: -120px;
+    top: -130px;
     width: 108px;
     height: 108px;
   }
@@ -9444,7 +9477,7 @@ h2 {
 
 @media (max-width: 760px) {
   .testimonial-nav {
-    top: 250px;
+    top: 290px;
     bottom: auto;
     width: 36px;
     height: 36px;
@@ -9629,6 +9662,6 @@ h2 {
   }
 
   .testimonial-slider-dots {
-    margin-top: 0;
+    margin-top: -50px;
   }
 }
