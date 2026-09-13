@@ -192,15 +192,15 @@ const aboutMetrics = [
 ];
 
 const testimonialImage = (fileName) =>
-  `${BASE_PATH}/image/testimonial/favhost/${fileName}`;
+  `${BASE_PATH}/image/testimonial/${fileName}`;
 
 const testimonials = [
   {
     name: "Subhradeep Das",
     role: "Owner",
     company: "Favhost",
-    image: testimonialImage("thumbnail_new.jpg"),
-    logo: testimonialImage("favhost_logo.png"),
+    image: testimonialImage("favhost/thumbnail_new.jpg"),
+    logo: testimonialImage("favhost/favhost_logo.png"),
     quote:
       "Working with Velocity Webtech Solution on Favhost.com was an outstanding experience from start to finish.They expertly developed a powerful rental channel manager with multi-calendar synchronization and real-time API integrations.Their deep expertise in cloud infrastructure delivered a fast, scalable, and highly reliable platform.Highly responsive and professional, they consistently delivered clean code on time — highly recommended for complex web applications.",
   },
