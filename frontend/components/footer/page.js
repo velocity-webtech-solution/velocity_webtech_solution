@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 
-const BASE_PATH = "";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();

@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { adminLogin } from "../api/apiservice";
 
-const BASE_PATH = "";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export default function AdminLoginPage() {
   const router = useRouter();

@@ -83,7 +83,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="admin-action-list">
-            <a href="/admin/enquiries/">
+            <a href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/admin/enquiries/`}>
               <span>
                 <Mail size={19} />
               </span>
@@ -103,7 +103,7 @@ export default function AdminDashboardPage() {
               </div>
               <ArrowUpRight size={17} />
             </a>
-            <a href="/">
+            <a href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/`}>
               <span>
                 <Home size={19} />
               </span>

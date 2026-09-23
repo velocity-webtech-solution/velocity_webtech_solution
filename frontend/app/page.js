@@ -35,7 +35,7 @@ import {
 import { useEffect, useState } from "react";
 import { submitContactForm } from "./api/apiservice";
 
-const BASE_PATH = "";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const services = [
   {

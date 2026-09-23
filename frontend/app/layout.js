@@ -1,6 +1,6 @@
 import "./globals.css";
 
-const basePath = "";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export const metadata = {
   title: "Velocity Webtech Solution",
