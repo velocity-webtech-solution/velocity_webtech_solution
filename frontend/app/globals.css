@@ -933,7 +933,7 @@ h2 {
   margin: 14px auto 18px;
   color: #f4ffff;
   font-size: clamp(0.76rem, 1.25vw, 0.92rem);
-  font-weight: 600;
+  /* font-weight: 600; */
   line-height: 1.55;
 }
 
@@ -7758,7 +7758,7 @@ h2 {
   padding-right: 0;
   color: #c8d4e3;
   font-size: 0.82rem;
-  font-weight: 600;
+  /* font-weight: 600; */
   line-height: 1.58;
 }
 
@@ -8358,7 +8358,7 @@ h2 {
   margin: 0 auto;
   color: #c8d4e3;
   font-size: 0.82rem;
-  font-weight: 600;
+  /* font-weight: 600; */
   line-height: 1.58;
 }
 
