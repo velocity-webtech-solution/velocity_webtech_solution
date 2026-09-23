@@ -204,15 +204,15 @@ const testimonials = [
     quote:
       "Working with Velocity Webtech Solution on Favhost.com was an outstanding experience from start to finish.They expertly developed a powerful rental channel manager with multi-calendar synchronization and real-time API integrations.Their deep expertise in cloud infrastructure delivered a fast, scalable, and highly reliable platform.Highly responsive and professional, they consistently delivered clean code on time — highly recommended for complex web applications.",
   },
-  // {
-  //   name: "Ananya Sen",
-  //   role: "Operations Lead",
-  //   company: "Retail Growth Partner",
-  //   image: "",
-  //   logo: "",
-  //   quote:
-  //     "The team understood our workflow quickly and turned a scattered process into a simple digital system. Communication stayed clear and delivery was smooth.",
-  // },
+  {
+    name: "Ananya Sen",
+    role: "Operations Lead",
+    company: "Retail Growth Partner",
+    image: "",
+    logo: "",
+    quote:
+      "The team understood our workflow quickly and turned a scattered process into a simple digital system. Communication stayed clear and delivery was smooth.",
+  },
   // {
   //   name: "Rahul Mehta",
   //   role: "Business Owner",
