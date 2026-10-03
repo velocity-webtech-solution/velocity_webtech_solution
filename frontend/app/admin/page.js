@@ -63,7 +63,7 @@ export default function AdminLoginPage() {
             <Image
               className="admin-login-logo"
               src={`${BASE_PATH}/image/logo_new.gif`}
-              alt="Velocity Webtech Solution logo"
+              alt="Velocity Webtech Solutions logo"
               width={72}
               height={72}
               priority
@@ -71,7 +71,7 @@ export default function AdminLoginPage() {
           </div>
 
           <div className="admin-brand-copy">
-            <p>Velocity Webtech Solution</p>
+            <p>Velocity Webtech Solutions</p>
             <h2>Admin Control Center</h2>
             <span>
               Manage enquiries, users, and website operations from one focused
@@ -98,7 +98,7 @@ export default function AdminLoginPage() {
               <Image
                 className="admin-login-heading-logo"
                 src={`${BASE_PATH}/image/logo_new.gif`}
-                alt="Velocity Webtech Solution logo"
+                alt="Velocity Webtech Solutions logo"
                 width={48}
                 height={48}
                 priority

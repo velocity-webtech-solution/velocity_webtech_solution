@@ -75,7 +75,7 @@ export default function AdminShell({ children }) {
           <a className="admin-sidebar-brand" href={`${BASE_PATH}/`}>
             <img
               src={`${BASE_PATH}/image/logo_new.gif`}
-              alt="Velocity Webtech Solution"
+              alt="Velocity Webtech Solutions"
             />
             <span>Velocity Admin</span>
           </a>

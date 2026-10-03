@@ -464,7 +464,7 @@ class ContactSubmissionReplyEmailView(APIView):
     def post(self, request):
         enquiry_id = request.data.get("enquiry_id")
         customer_email = (request.data.get("email") or "").strip()
-        subject = (request.data.get("subject") or "Reply from Velocity Webtech Solution").strip()
+        subject = (request.data.get("subject") or "Reply from Velocity Webtech Solutions").strip()
         message = (request.data.get("message") or "").strip()
 
         if not enquiry_id:

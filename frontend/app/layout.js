@@ -3,7 +3,7 @@ import "./globals.css";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export const metadata = {
-  title: "Velocity Webtech Solution",
+  title: "Velocity Webtech Solutions",
   description:
     "Modern software development services for websites, apps, custom software, e-commerce, UI/UX, APIs, and cloud deployment.",
   icons: {

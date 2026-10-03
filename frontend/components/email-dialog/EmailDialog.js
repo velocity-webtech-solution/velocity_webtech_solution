@@ -145,7 +145,10 @@ export default function EmailDialog({ emailDialog, onClose }) {
           : [];
 
     return [...submissions]
-      .sort((first, second) => new Date(second.createdAt) - new Date(first.createdAt))
+      .sort(
+        (first, second) =>
+          new Date(second.createdAt) - new Date(first.createdAt),
+      )
       .map((submission) => ({
         ...submission,
         id: `submission-${submission.id}`,
@@ -167,7 +170,7 @@ export default function EmailDialog({ emailDialog, onClose }) {
 
   function getReplySubject(subject) {
     if (!subject) {
-      return "Reply from Velocity Webtech Solution";
+      return "Reply from Velocity Webtech Solutions";
     }
 
     return subject.toLowerCase().startsWith("re:") ? subject : `Re: ${subject}`;
@@ -178,7 +181,7 @@ export default function EmailDialog({ emailDialog, onClose }) {
       id: reply.id || `${reply.subject}-${reply.sent_at || reply.sentAt}`,
       enquiryId: reply.contact_submission || reply.enquiryId || "",
       direction: reply.direction || "outgoing",
-      subject: reply.subject || "Reply from Velocity Webtech Solution",
+      subject: reply.subject || "Reply from Velocity Webtech Solutions",
       message: reply.message || "",
       from: reply.from || reply.from_email || emailDialog.fromAccount || "-",
       to: reply.to || reply.to_email || enquiry?.email || "-",
@@ -234,8 +237,8 @@ export default function EmailDialog({ emailDialog, onClose }) {
 
     return Boolean(
       service &&
-        subject.includes("new contact enquiry") &&
-        subject.includes(service),
+      subject.includes("new contact enquiry") &&
+      subject.includes(service),
     );
   }
 
@@ -266,7 +269,8 @@ export default function EmailDialog({ emailDialog, onClose }) {
         email: message.submission?.email || enquiry?.email || "",
         name: message.submission?.name || enquiry?.name || "",
         phone: message.submission?.phone || enquiry?.phone || "",
-        requirement: message.submission?.requirement || enquiry?.requirement || "",
+        requirement:
+          message.submission?.requirement || enquiry?.requirement || "",
         submittedAt: message.submission?.date || enquiry?.date || "",
         subject: getReplySubject(message.subject),
         message: "",
@@ -318,9 +322,7 @@ export default function EmailDialog({ emailDialog, onClose }) {
       });
       const savedReply = normalizeReply(data.reply || {});
 
-      setReplyHistory((current) =>
-        mergeReplyHistory([savedReply, ...current]),
-      );
+      setReplyHistory((current) => mergeReplyHistory([savedReply, ...current]));
       setExpandedReplyId(savedReply.id);
 
       setReplyComposer((current) => ({
@@ -372,7 +374,8 @@ export default function EmailDialog({ emailDialog, onClose }) {
         <div className="email-dialog-account">
           <span>Gmail account</span>
           <strong>
-            {emailDialog.fromAccount || "subhankar.rc@velocitywebtechsolution.com"}
+            {emailDialog.fromAccount ||
+              "subhankar.rc@velocitywebtechsolution.com"}
           </strong>
         </div>
 
@@ -472,12 +475,14 @@ export default function EmailDialog({ emailDialog, onClose }) {
                         <footer className="email-detail-footer">
                           <span>
                             <Send size={16} />
-                            Sent from Velocity Webtech Solution contact form.
+                            Sent from Velocity Webtech Solutions contact form.
                           </span>
                           <button
                             type="button"
                             onClick={() => handleReplyOpen(message)}
-                            aria-expanded={replyComposer.messageId === messageId}
+                            aria-expanded={
+                              replyComposer.messageId === messageId
+                            }
                           >
                             <Reply size={16} />
                             Reply to Client
@@ -516,7 +521,9 @@ export default function EmailDialog({ emailDialog, onClose }) {
                                         </small>
                                         {reply.subject}
                                       </span>
-                                      <time>{formatEmailDate(reply.sentAt)}</time>
+                                      <time>
+                                        {formatEmailDate(reply.sentAt)}
+                                      </time>
                                       {isExpanded ? (
                                         <ChevronUp size={16} />
                                       ) : (
@@ -592,7 +599,8 @@ export default function EmailDialog({ emailDialog, onClose }) {
                                 rows={5}
                               />
 
-                              {(replyComposer.status || replyComposer.error) && (
+                              {(replyComposer.status ||
+                                replyComposer.error) && (
                                 <p
                                   className={
                                     replyComposer.error
@@ -609,22 +617,24 @@ export default function EmailDialog({ emailDialog, onClose }) {
                                   type="submit"
                                   disabled={replyComposer.sending}
                                 >
-                                  {replyComposer.sending ? "Sending..." : "Send"}
+                                  {replyComposer.sending
+                                    ? "Sending..."
+                                    : "Send"}
                                 </button>
                                 <button
                                   type="button"
                                   onClick={() =>
-                                  setReplyComposer({
-                                    messageId: "",
-                                    enquiryId: "",
-                                    email: "",
-                                    name: "",
-                                    phone: "",
-                                    requirement: "",
-                                    submittedAt: "",
-                                    subject: "",
-                                    message: "",
-                                    sending: false,
+                                    setReplyComposer({
+                                      messageId: "",
+                                      enquiryId: "",
+                                      email: "",
+                                      name: "",
+                                      phone: "",
+                                      requirement: "",
+                                      submittedAt: "",
+                                      subject: "",
+                                      message: "",
+                                      sending: false,
                                       status: "",
                                       error: "",
                                     })

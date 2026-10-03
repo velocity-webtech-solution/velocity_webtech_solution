@@ -61,18 +61,18 @@ export default function Header() {
       <a
         className="brand"
         href={`${BASE_PATH}/#home`}
-        aria-label="Velocity Webtech Solution home"
+        aria-label="Velocity Webtech Solutions home"
       >
         <div className="brand-logo">
           <Image
             src={`${BASE_PATH}/image/logo_new.gif`}
-            alt="Velocity Webtech Solution logo"
+            alt="Velocity Webtech Solutions logo"
             width={54}
             height={54}
             priority
           />
         </div>
-        <span>Velocity Webtech Solution</span>
+        <span>Velocity Webtech Solutions</span>
       </a>
 
       <nav className="desktop-nav" aria-label="Primary navigation">

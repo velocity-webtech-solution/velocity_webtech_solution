@@ -130,7 +130,9 @@ export default function ServicePricingDetail({ serviceId }) {
               <span>
                 <Sparkles size={24} />
               </span>
-              <h3>{service.audienceTitle || "Built for real business goals"}</h3>
+              <h3>
+                {service.audienceTitle || "Built for real business goals"}
+              </h3>
               <p>{service.audience}</p>
             </motion.div>
           </motion.div>
@@ -214,7 +216,7 @@ export default function ServicePricingDetail({ serviceId }) {
           >
             <p className="eyebrow">
               <CheckCircle2 size={18} />
-              Why Choose Velocity Webtech Solution?
+              Why Choose Velocity Webtech Solutions?
             </p>
             <h2>
               {service.choiceTitle ||

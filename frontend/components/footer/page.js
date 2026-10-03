@@ -12,12 +12,12 @@ export default function Footer() {
         <div className="footer-brand">
           <Image
             src={`${BASE_PATH}/image/logo_new.gif`}
-            alt="Velocity Webtech Solution logo"
+            alt="Velocity Webtech Solutions logo"
             width={64}
             height={64}
           />
           <div>
-            <h3>Velocity Webtech Solution</h3>
+            <h3>Velocity Webtech Solutions</h3>
             {/* <div className="footer-brand-address">
               <MapPin size={18} aria-hidden="true" />
               <span>
@@ -49,7 +49,7 @@ export default function Footer() {
       </div>
       <div className="footer-bottom">
         <span>
-          © {currentYear} Velocity Webtech Solution. All rights reserved.
+          © {currentYear} Velocity Webtech Solutions. All rights reserved.
         </span>
         <span>Your Vision, Our Mission.</span>
       </div>

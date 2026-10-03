@@ -202,7 +202,7 @@ const testimonials = [
     image: testimonialImage("favhost/thumbnail_new.jpg"),
     logo: testimonialImage("favhost/favhost_logo.png"),
     quote:
-      "Working with Velocity Webtech Solution on Favhost.com was an outstanding experience from start to finish.They expertly developed a powerful rental channel manager with multi-calendar synchronization and real-time API integrations.Their deep expertise in cloud infrastructure delivered a fast, scalable, and highly reliable platform.Highly responsive and professional, they consistently delivered clean code on time — highly recommended for complex web applications.",
+      "Working with Velocity Webtech Solutions on Favhost.com was an outstanding experience from start to finish.They expertly developed a powerful rental channel manager with multi-calendar synchronization and real-time API integrations.Their deep expertise in cloud infrastructure delivered a fast, scalable, and highly reliable platform.Highly responsive and professional, they consistently delivered clean code on time — highly recommended for complex web applications.",
   },
   // {
   //   name: "Ananya Sen",
@@ -530,7 +530,7 @@ export default function Home() {
             <Sparkles size={18} />
             Web, App & Software Studio
           </motion.p>
-          <motion.h1 variants={fadeUp}>Velocity Webtech Solution</motion.h1>
+          <motion.h1 variants={fadeUp}>Velocity Webtech Solutions</motion.h1>
           <motion.p className="hero-copy" variants={fadeUp}>
             We design and build polished websites, mobile apps, backend systems,
             and cloud-ready products for businesses that want to move faster
@@ -824,8 +824,9 @@ export default function Home() {
             Trusted <span>by Clients</span>
           </h2>
           <p>
-            Real feedback from businesses that trusted Velocity Webtech Solution
-            for design, development, deployment, and long-term support.
+            Real feedback from businesses that trusted Velocity Webtech
+            Solutions for design, development, deployment, and long-term
+            support.
           </p>
         </motion.div>
 

@@ -136,7 +136,7 @@ export default function Portfolio() {
           </motion.p>
           <motion.h1 variants={fadeUp}>Portfolio</motion.h1>
           <motion.p className="portfolio-hero-copy" variants={fadeUp}>
-            Meet the development capabilities behind Velocity Webtech Solution:
+            Meet the development capabilities behind Velocity Webtech Solutions:
             frontend, backend, mobile apps, cloud deployment, design, QA, and
             complete product delivery.
           </motion.p>

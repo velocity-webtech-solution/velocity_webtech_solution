@@ -27,7 +27,7 @@ export const pricingSections = [
     icon: Globe2,
     tone: "blue",
     intro:
-      "At Velocity Webtech Solution, we design and develop modern websites tailored to your business goals, brand identity, and customer needs. Whether you need a simple business website, portfolio, school website, e-commerce platform, or a fully customized web application, we provide scalable and user-friendly solutions.",
+      "At Velocity Webtech Solutions, we design and develop modern websites tailored to your business goals, brand identity, and customer needs. Whether you need a simple business website, portfolio, school website, e-commerce platform, or a fully customized web application, we provide scalable and user-friendly solutions.",
     items: [
       ["Starter Website", "Starting at Rs. 4,999"],
       ["Business Website", "Starting at Rs. 19,999"],
@@ -59,7 +59,7 @@ export const pricingSections = [
     ],
     startingPrice:
       "Starting from Rs. 4,999 depending on the type of website, number of pages, features, integrations, and customization required.",
-    cta: "Ready to Build Your Website? Contact Velocity Webtech Solution Today.",
+    cta: "Ready to Build Your Website? Contact Velocity Webtech Solutions Today.",
     hidePricingDetails: true,
   },
   {
@@ -73,7 +73,7 @@ export const pricingSections = [
     tone: "green",
     storyTitle: "Mobile apps built for smooth customer experiences.",
     intro:
-      "At Velocity Webtech Solution, we develop mobile apps that are designed around your business requirements, target users, and long-term growth. Whether you need a simple business app, customer service app, booking app, e-commerce app, educational app, or a fully customized mobile solution, we can build a scalable application with a smooth user experience.",
+      "At Velocity Webtech Solutions, we develop mobile apps that are designed around your business requirements, target users, and long-term growth. Whether you need a simple business app, customer service app, booking app, e-commerce app, educational app, or a fully customized mobile solution, we can build a scalable application with a smooth user experience.",
     items: [
       ["Basic Android App", "Starting at Rs. 19,999"],
       ["Android + iOS App", "Starting at Rs. 59,999"],
@@ -112,7 +112,7 @@ export const pricingSections = [
     ],
     startingPrice:
       "Starting from Rs. 19,999 depending on platform, number of screens, features, integrations, backend requirements, and customization.",
-    cta: "Ready to Turn Your Idea Into a Mobile App? Contact Velocity Webtech Solution Today.",
+    cta: "Ready to Turn Your Idea Into a Mobile App? Contact Velocity Webtech Solutions Today.",
     hidePricingDetails: true,
   },
   {
@@ -126,7 +126,7 @@ export const pricingSections = [
     tone: "violet",
     storyTitle: "Software shaped around your real workflow.",
     intro:
-      "At Velocity Webtech Solution, we develop custom software solutions designed around your business requirements, workflows, users, and long-term goals. From internal management systems to customer-facing applications, we create practical and scalable software that helps reduce manual work, improve accuracy, and streamline daily operations.",
+      "At Velocity Webtech Solutions, we develop custom software solutions designed around your business requirements, workflows, users, and long-term goals. From internal management systems to customer-facing applications, we create practical and scalable software that helps reduce manual work, improve accuracy, and streamline daily operations.",
     items: [
       ["Business Software", "Starting at Rs. 49,999"],
       ["CRM / ERP Solution", "Starting at Rs. 79,999"],
@@ -166,7 +166,7 @@ export const pricingSections = [
     ],
     startingPrice:
       "Pricing depends on the number of modules, user roles, integrations, workflow complexity, reporting requirements, and level of customization.",
-    cta: "Need Software Built Around Your Business? Talk to Velocity Webtech Solution and Start Your Custom Software Project Today.",
+    cta: "Need Software Built Around Your Business? Talk to Velocity Webtech Solutions and Start Your Custom Software Project Today.",
     hidePricingDetails: true,
   },
   {
@@ -180,7 +180,7 @@ export const pricingSections = [
     tone: "orange",
     storyTitle: "Online stores designed to sell smoothly.",
     intro:
-      "At Velocity Webtech Solution, we develop modern e-commerce websites tailored to your products, customers, and business goals. Whether you are starting a new online store or upgrading an existing business, we create scalable solutions that help you sell more efficiently and manage your store with ease.",
+      "At Velocity Webtech Solutions, we develop modern e-commerce websites tailored to your products, customers, and business goals. Whether you are starting a new online store or upgrading an existing business, we create scalable solutions that help you sell more efficiently and manage your store with ease.",
     items: [
       ["Starter Online Store", "Starting at Rs. 29,999"],
       ["Business E-commerce", "Starting at Rs. 49,999"],
@@ -221,7 +221,7 @@ export const pricingSections = [
     ],
     startingPrice:
       "Starting price depends on the number of products, features, payment integrations, shipping requirements, admin functionality, and customization needed.",
-    cta: "Ready to Start Selling Online? Build Your E-commerce Store with Velocity Webtech Solution Today.",
+    cta: "Ready to Start Selling Online? Build Your E-commerce Store with Velocity Webtech Solutions Today.",
     hidePricingDetails: true,
   },
   {
@@ -235,7 +235,7 @@ export const pricingSections = [
     tone: "cyan",
     storyTitle: "Business systems that keep daily operations organized.",
     intro:
-      "Velocity Webtech Solution builds CRM, ERP, and business management systems around your real process. From enquiry tracking and customer records to inventory, billing, reporting, and staff workflows, we create software that helps your team work faster with better visibility.",
+      "Velocity Webtech Solutions builds CRM, ERP, and business management systems around your real process. From enquiry tracking and customer records to inventory, billing, reporting, and staff workflows, we create software that helps your team work faster with better visibility.",
     items: [
       ["CRM System", "Custom quote"],
       ["ERP System", "Custom quote"],
@@ -271,7 +271,7 @@ export const pricingSections = [
     ],
     startingPrice:
       "Pricing depends on modules, user roles, reports, integrations, workflow complexity, and customization required.",
-    cta: "Ready to Organize Your Business Operations? Build Your CRM or ERP System with Velocity Webtech Solution Today.",
+    cta: "Ready to Organize Your Business Operations? Build Your CRM or ERP System with Velocity Webtech Solutions Today.",
     hidePricingDetails: true,
   },
   {
@@ -308,7 +308,7 @@ export const pricingSections = [
     tone: "indigo",
     storyTitle: "Backend architecture built for security and scale.",
     intro:
-      "At Velocity Webtech Solution, we develop robust APIs and backend architectures designed to handle your business logic, data, users, integrations, and future growth. Whether you need a new backend from scratch or want to improve an existing system, we focus on performance, security, maintainability, and scalability.",
+      "At Velocity Webtech Solutions, we develop robust APIs and backend architectures designed to handle your business logic, data, users, integrations, and future growth. Whether you need a new backend from scratch or want to improve an existing system, we focus on performance, security, maintainability, and scalability.",
     items: [
       ["REST API Development", "Starting at Rs. 19,999"],
       ["Database Architecture", "Starting at Rs. 14,999"],
@@ -350,7 +350,7 @@ export const pricingSections = [
     ],
     startingPrice:
       "Pricing depends on API complexity, number of modules, database requirements, authentication methods, integrations, user roles, background processing, reporting, and deployment needs.",
-    cta: "Need a Powerful Backend for Your App or Business? Build a Secure and Scalable API Solution with Velocity Webtech Solution.",
+    cta: "Need a Powerful Backend for Your App or Business? Build a Secure and Scalable API Solution with Velocity Webtech Solutions.",
     hidePricingDetails: true,
   },
   {
@@ -364,7 +364,7 @@ export const pricingSections = [
     tone: "sky",
     storyTitle: "Production deployment built for stability.",
     intro:
-      "At Velocity Webtech Solution, we help businesses move their applications from development to a live production environment with proper hosting, domain configuration, server setup, security, performance tuning, and post-launch support. Whether you are launching a new website, API, mobile app backend, or custom software system, we provide deployment solutions based on your technical and business requirements.",
+      "At Velocity Webtech Solutions, we help businesses move their applications from development to a live production environment with proper hosting, domain configuration, server setup, security, performance tuning, and post-launch support. Whether you are launching a new website, API, mobile app backend, or custom software system, we provide deployment solutions based on your technical and business requirements.",
     items: [
       ["Website Maintenance", "Starting at Rs. 2,999 / month"],
       ["POS / Billing Software", "Starting at Rs. 24,999"],
@@ -406,7 +406,7 @@ export const pricingSections = [
     ],
     startingPrice:
       "Pricing depends on cloud provider, server size, deployment complexity, database requirements, number of applications, security configuration, backup needs, monitoring, and ongoing maintenance requirements.",
-    cta: "Ready to Take Your Application Live? Deploy Securely and Reliably with Velocity Webtech Solution.",
+    cta: "Ready to Take Your Application Live? Deploy Securely and Reliably with Velocity Webtech Solutions.",
     hidePricingDetails: true,
   },
   {
@@ -420,7 +420,7 @@ export const pricingSections = [
     tone: "blue",
     storyTitle: "Reliable maintenance for digital systems already in use.",
     intro:
-      "Velocity Webtech Solution provides website and software maintenance for businesses that need regular updates, issue fixing, performance checks, backups, and technical support. We help keep your digital platform stable so your business can keep moving.",
+      "Velocity Webtech Solutions provides website and software maintenance for businesses that need regular updates, issue fixing, performance checks, backups, and technical support. We help keep your digital platform stable so your business can keep moving.",
     items: [
       ["Website Maintenance", "Custom quote"],
       ["Software Support", "Custom quote"],
@@ -454,7 +454,7 @@ export const pricingSections = [
     ],
     startingPrice:
       "Pricing depends on maintenance frequency, issue complexity, platform type, hosting needs, and requested updates.",
-    cta: "Need Reliable Website or Software Support? Contact Velocity Webtech Solution Today.",
+    cta: "Need Reliable Website or Software Support? Contact Velocity Webtech Solutions Today.",
     hidePricingDetails: true,
   },
   {
@@ -468,7 +468,7 @@ export const pricingSections = [
     tone: "orange",
     storyTitle: "Domain, hosting, and launch setup without confusion.",
     intro:
-      "At Velocity Webtech Solution, we assist businesses, startups, professionals, and organizations with domain registration, hosting setup, DNS configuration, SSL security, business email, and launch preparation. Whether you are creating a new website or moving an existing project to a new hosting provider, we help ensure everything is configured correctly.",
+      "At Velocity Webtech Solutions, we assist businesses, startups, professionals, and organizations with domain registration, hosting setup, DNS configuration, SSL security, business email, and launch preparation. Whether you are creating a new website or moving an existing project to a new hosting provider, we help ensure everything is configured correctly.",
     items: [
       ["Domain Guidance", "Custom quote"],
       ["Hosting Setup", "Custom quote"],
@@ -507,7 +507,7 @@ export const pricingSections = [
     ],
     startingPrice:
       "Pricing depends on domain provider, hosting type, server configuration, email requirements, migration complexity, SSL setup, and the level of technical assistance required.",
-    cta: "Need Help Taking Your Website Live? Get Domain, Hosting & Launch Support from Velocity Webtech Solution.",
+    cta: "Need Help Taking Your Website Live? Get Domain, Hosting & Launch Support from Velocity Webtech Solutions.",
     hidePricingDetails: true,
   },
   {
@@ -521,7 +521,7 @@ export const pricingSections = [
     tone: "green",
     storyTitle: "Hands-on software training for real working needs.",
     intro:
-      "At Velocity Webtech Solution, we provide practical software training for individuals, students, professionals, business owners, and office staff who want to become more confident using digital tools and business systems. Our training focuses on simple explanations, guided practice, and real working examples.",
+      "At Velocity Webtech Solutions, we provide practical software training for individuals, students, professionals, business owners, and office staff who want to become more confident using digital tools and business systems. Our training focuses on simple explanations, guided practice, and real working examples.",
     items: [
       ["Admin Panel Training", "Custom quote"],
       ["Software Usage Training", "Custom quote"],
@@ -558,7 +558,7 @@ export const pricingSections = [
     ],
     startingPrice:
       "Training fees depend on course duration, number of participants, software complexity, training mode, customization, and the level of post-training support required.",
-    cta: "Learn to Use Business Software with Confidence - Get Practical Software Training from Velocity Webtech Solution.",
+    cta: "Learn to Use Business Software with Confidence - Get Practical Software Training from Velocity Webtech Solutions.",
     hidePricingDetails: true,
   },
 ];
