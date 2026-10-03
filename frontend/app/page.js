@@ -102,8 +102,8 @@ const services = [
     path: "/domain-hosting-assistance-services/",
   },
   {
-    title: "Software Training",
-    text: "Practical training for software tools, admin panels, and digital workflows.",
+    title: "Software Development Courses",
+    text: "Hands-on full stack web development courses with live projects, coding practice, and career-ready skills.",
     icon: BookOpenCheck,
     tone: "green",
     path: "/software-training-services/",
