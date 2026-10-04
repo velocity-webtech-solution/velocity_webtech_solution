@@ -8,5 +8,5 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 nginx-local.conf
-readme.md
-namechip.md
+# readme.md
+# namechip.md
