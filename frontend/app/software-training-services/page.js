@@ -232,7 +232,8 @@ export default function SoftwareTrainingServicesPage() {
               </p>
               <h1>
                 Full Stack
-                <span>Web Development</span>
+                <span>Web</span>
+                <span>Development</span>
               </h1>
               <p className="hero-subtitle">
                 From basics to job-ready skills with frontend, backend,
@@ -529,13 +530,16 @@ export default function SoftwareTrainingServicesPage() {
             grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.72fr);
             gap: clamp(24px, 5vw, 72px);
             align-items: center;
+            min-width: 0;
           }
 
           .hero-copy {
             display: grid;
             justify-items: start;
             gap: 16px;
+            width: 100%;
             max-width: 880px;
+            min-width: 0;
             text-align: left;
           }
 
@@ -555,18 +559,22 @@ export default function SoftwareTrainingServicesPage() {
             color: #eef2ff;
             font-size: clamp(1rem, 1.6vw, 1.22rem);
             font-weight: 900;
+            line-height: 1.15;
             box-shadow:
               inset 0 0 18px rgba(14, 165, 233, 0.16),
               0 0 28px rgba(56, 189, 248, 0.32);
           }
 
           .hero-copy h1 {
+            width: 100%;
             max-width: 960px;
             margin: 0;
             font-size: clamp(3.4rem, 9vw, 6.1rem);
             font-weight: 1000;
             line-height: 0.82;
             text-transform: uppercase;
+            overflow-wrap: normal;
+            word-break: keep-all;
             text-shadow:
               0 5px 0 rgba(2, 6, 23, 0.96),
               0 0 24px rgba(34, 211, 238, 0.74),
@@ -575,6 +583,7 @@ export default function SoftwareTrainingServicesPage() {
 
           .hero-copy h1 span {
             display: block;
+            white-space: nowrap;
             background: linear-gradient(
               180deg,
               #fff7ed 0%,
@@ -590,12 +599,14 @@ export default function SoftwareTrainingServicesPage() {
           }
 
           .hero-subtitle {
+            width: 100%;
             max-width: 720px;
             margin: 0;
             color: #dbeafe;
             font-size: clamp(1.05rem, 1.8vw, 1.28rem);
             font-weight: 700;
             line-height: 1.48;
+            overflow-wrap: anywhere;
           }
 
           .hero-actions {
@@ -625,6 +636,8 @@ export default function SoftwareTrainingServicesPage() {
 
           .hero-showcase {
             position: relative;
+            width: 100%;
+            min-width: 0;
             min-height: 430px;
           }
 
@@ -820,6 +833,8 @@ export default function SoftwareTrainingServicesPage() {
             justify-content: center;
             min-height: 54px;
             overflow: hidden;
+            min-width: 0;
+            padding: 0 10px;
             border: 1px solid rgba(148, 163, 184, 0.34);
             border-radius: 8px;
             background:
@@ -831,6 +846,8 @@ export default function SoftwareTrainingServicesPage() {
               rgba(15, 23, 42, 0.9);
             color: #ffffff;
             font-weight: 1000;
+            text-align: center;
+            overflow-wrap: anywhere;
             box-shadow:
               inset 0 0 0 1px rgba(255, 255, 255, 0.04),
               0 12px 24px rgba(0, 0, 0, 0.24);
@@ -1030,6 +1047,7 @@ export default function SoftwareTrainingServicesPage() {
             color: #ffffff;
             text-align: left;
             cursor: pointer;
+            min-width: 0;
             box-shadow:
               inset 0 0 0 1px rgba(255, 255, 255, 0.03),
               0 0 20px color-mix(in srgb, var(--accent), transparent 80%);
@@ -1202,6 +1220,7 @@ export default function SoftwareTrainingServicesPage() {
               rgba(15, 23, 42, 0.72);
             color: #f8fafc;
             font-weight: 800;
+            overflow-wrap: anywhere;
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
             transition:
               transform 180ms ease,
@@ -1241,6 +1260,7 @@ export default function SoftwareTrainingServicesPage() {
             background: rgba(2, 6, 23, 0.8);
             color: #ffffff;
             font-weight: 900;
+            min-width: 0;
             box-shadow:
               inset 0 0 0 1px rgba(217, 70, 239, 0.72),
               0 0 24px rgba(217, 70, 239, 0.22);
@@ -1282,6 +1302,7 @@ export default function SoftwareTrainingServicesPage() {
           .backend-pill {
             padding: 14px 18px;
             border: 1px solid rgba(217, 70, 239, 0.72);
+            line-height: 1.35;
           }
 
           .backend-pill svg {
@@ -1417,6 +1438,7 @@ export default function SoftwareTrainingServicesPage() {
               rgba(2, 6, 23, 0.76);
             color: #f8fafc;
             font-weight: 900;
+            min-width: 0;
             box-shadow: inset 0 0 28px rgba(14, 165, 233, 0.15);
             animation: course-card-float 4.2s ease-in-out infinite;
             transition:
@@ -1554,12 +1576,43 @@ export default function SoftwareTrainingServicesPage() {
           @media (max-width: 680px) {
             .training-hero {
               min-height: auto;
-              padding-top: calc(var(--header-offset, 78px) + 24px);
+              gap: 18px;
+              padding:
+                calc(var(--header-offset, 78px) + 20px)
+                clamp(14px, 4.8vw, 22px)
+                30px;
             }
 
             .hero-topline {
               display: grid;
               justify-content: start;
+              gap: 8px;
+              font-size: clamp(1.45rem, 8vw, 2.05rem);
+              line-height: 1.05;
+            }
+
+            .course-kicker {
+              max-width: 100%;
+              padding: 9px 14px;
+              white-space: normal;
+            }
+
+            .hero-copy {
+              gap: 13px;
+            }
+
+            .hero-copy h1 {
+              font-size: clamp(1.95rem, 10.6vw, 3.2rem);
+              line-height: 0.94;
+              text-shadow:
+                0 3px 0 rgba(2, 6, 23, 0.96),
+                0 0 18px rgba(34, 211, 238, 0.66),
+                0 0 38px rgba(14, 165, 233, 0.34);
+            }
+
+            .hero-subtitle {
+              font-size: 0.94rem;
+              line-height: 1.4;
             }
 
             .hero-showcase {
@@ -1593,15 +1646,45 @@ export default function SoftwareTrainingServicesPage() {
             }
 
             .tech-strip,
-            .tab-list,
             .panel-list,
             .tool-pills,
             .feature-row {
               grid-template-columns: 1fr;
             }
 
+            .tech-strip {
+              gap: 8px;
+              padding: 10px;
+            }
+
+            .tech-strip span {
+              min-height: 48px;
+            }
+
+            .tab-list {
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+              gap: 8px;
+            }
+
             .tab-card {
-              min-height: 76px;
+              grid-template-columns: 1fr;
+              justify-items: center;
+              min-height: 84px;
+              padding: 12px 8px;
+              text-align: center;
+            }
+
+            .tab-icon {
+              width: 42px;
+              height: 42px;
+            }
+
+            .tab-text strong {
+              font-size: 0.9rem;
+            }
+
+            .tab-text small {
+              font-size: 0.78rem;
             }
 
             .panel-header {
@@ -1615,6 +1698,59 @@ export default function SoftwareTrainingServicesPage() {
 
             .backend-pill {
               align-items: flex-start;
+            }
+          }
+
+          @media (max-width: 380px) {
+            .tabs-section,
+            .quick-band,
+            .outcome-section {
+              width: min(1180px, calc(100% - 20px));
+            }
+
+            .hero-copy h1 {
+              font-size: clamp(1.68rem, 9.2vw, 2.18rem);
+              line-height: 1;
+              text-shadow:
+                0 2px 0 rgba(2, 6, 23, 0.96),
+                0 0 14px rgba(34, 211, 238, 0.58),
+                0 0 28px rgba(14, 165, 233, 0.28);
+            }
+
+            .hero-subtitle {
+              font-size: 0.86rem;
+            }
+
+            .course-kicker,
+            .hero-actions span {
+              width: 100%;
+              justify-content: center;
+            }
+
+            .hero-showcase {
+              display: none;
+            }
+
+            .tech-strip,
+            .tab-list {
+              grid-template-columns: 1fr;
+            }
+
+            .tab-layout {
+              padding: 8px;
+            }
+
+            .panel-header {
+              display: grid;
+              gap: 12px;
+            }
+
+            .panel-header h3 {
+              font-size: clamp(1.75rem, 10vw, 2.35rem);
+            }
+
+            .backend-pill {
+              padding: 12px;
             }
           }
         `}</style>
