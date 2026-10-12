@@ -18,6 +18,7 @@ import {
   Globe2,
   Layers3,
   Mail,
+  Megaphone,
   MessageCircle,
   PenTool,
   Phone,
@@ -107,6 +108,13 @@ const services = [
     icon: BookOpenCheck,
     tone: "green",
     path: "/software-training-services/",
+  },
+  {
+    title: "Digital Marketing",
+    text: "Grow your online presence with SEO, social media marketing, content strategy, and paid advertising campaigns.",
+    icon: Megaphone,
+    tone: "violet",
+    path: "/#contact",
   },
 ];
 
@@ -1203,6 +1211,7 @@ export default function Home() {
                 <option>UI/UX Design</option>
                 <option>API & Backend Development</option>
                 <option>Cloud & Deployment Services</option>
+                <option>Digital Marketing</option>
               </select>
             </label>
             <label>

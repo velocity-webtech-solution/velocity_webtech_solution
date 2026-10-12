@@ -18,7 +18,7 @@ exists = User.objects.filter(username='admin').exists();
 print(exists)" | grep -q 'True'; then
     echo "✅ Creating superuser..."
     DJANGO_SUPERUSER_USERNAME=admin \
-    DJANGO_SUPERUSER_EMAIL= velocitywebtechsolution@gmail.com \
+    DJANGO_SUPERUSER_EMAIL=velocitywebtechsolution@gmail.com \
     DJANGO_SUPERUSER_PASSWORD=admin123 \
     python manage.py createsuperuser --noinput
 else
