@@ -41,8 +41,8 @@ export default function Footer() {
           </div>
           <div className="footer-contact-item">
             <Mail size={20} aria-hidden="true" />
-            <a href="mailto:info@velocitywebtechsolution.com">
-              info@velocitywebtechsolution.com
+            <a href="mailto:info@velocitywebtechsolutions.com">
+              info@velocitywebtechsolutions.com
             </a>
           </div>
         </div>

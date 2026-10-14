@@ -1158,7 +1158,7 @@ export default function Home() {
               </a>
               <a className="contact-email-link">
                 <Mail size={22} />
-                info@velocitywebtechsolution.com
+                info@velocitywebtechsolutions.com
               </a>
             </div>
           </motion.div>
