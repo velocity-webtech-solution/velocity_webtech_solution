@@ -271,13 +271,13 @@ export default function ServicePricingDetail({ serviceId }) {
           <Phone size={20} />
           +91 6291499409
         </a>
-        <a href="mailto:subhankar.rc@velocitywebtechsolution.com">
+        <a href="mailto:info@velocitywebtechsolutions.com">
           <Mail size={20} />
-          subhankar.rc@velocitywebtechsolution.com
+          info@velocitywebtechsolutions.com
         </a>
-        <a href="https://www.velocitywebtechsolution.com">
+        <a href="https://www.velocitywebtechsolutions.com">
           <Globe2 size={20} />
-          www.velocitywebtechsolution.com
+          www.velocitywebtechsolutions.com
         </a>
       </section>
 

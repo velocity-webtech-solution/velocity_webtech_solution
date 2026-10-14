@@ -1,11 +1,21 @@
+import { SITE_URL } from "../lib/seo";
+
 import "./globals.css";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export const metadata = {
-  title: "Velocity Webtech Solutions",
+  metadataBase: new URL(SITE_URL),
+  title: "Velocity Webtech Solutions | Website & Software Development",
   description:
-    "Modern software development services for websites, apps, custom software, e-commerce, UI/UX, APIs, and cloud deployment.",
+    "Professional website development, mobile app development, e-commerce, custom software, and digital marketing services in Kolkata.",
+  openGraph: {
+    title: "Velocity Webtech Solutions",
+    url: `${SITE_URL}/`,
+    siteName: "Velocity Webtech Solutions",
+    type: "website",
+  },
+  robots: { index: true, follow: true },
   icons: {
     icon: [{ url: `${basePath}/favicon.ico`, type: "image/x-icon" }],
     shortcut: [{ url: `${basePath}/favicon.ico`, type: "image/x-icon" }],

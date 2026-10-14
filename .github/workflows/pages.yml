@@ -39,6 +39,15 @@ jobs:
       - name: Build static site
         run: npm run build
 
+      - name: Verify exported SEO files
+        run: |
+          test -s out/sitemap.xml
+          test -s out/robots.txt
+          grep -Fq 'https://www.velocitywebtechsolutions.com/' out/sitemap.xml
+          grep -Fq 'Sitemap: https://www.velocitywebtechsolutions.com/sitemap.xml' out/robots.txt
+          grep -Fq '<link rel="canonical" href="https://www.velocitywebtechsolutions.com/"' out/index.html
+          grep -Fxq 'www.velocitywebtechsolutions.com' out/CNAME
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
