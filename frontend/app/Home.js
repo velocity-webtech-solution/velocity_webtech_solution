@@ -802,7 +802,7 @@ export default function Home() {
           </motion.div>
           <div className="brochure-frame">
             <Image
-              src={`${BASE_PATH}/image/brochure_2.png`}
+              src={`${BASE_PATH}/image/brochure_3.png`}
               alt="Velocity Webtech services brochure"
               width={1536}
               height={1024}

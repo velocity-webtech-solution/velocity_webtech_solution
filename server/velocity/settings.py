@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['*','13.201.101.168','localhost','127.0.0.1','velocitywebtechsolution.com','www.velocitywebtechsolution.com']
+ALLOWED_HOSTS = ['*','13.201.101.168','localhost','127.0.0.1','velocitywebtechsolutions.com','www.velocitywebtechsolutions.com']
 
 
 CORS_ORIGIN_WHITELIST = [
@@ -47,10 +47,10 @@ USE_X_FORWARDED_HOST = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # ✅ Allows Next.js local development
     "http://13.201.101.168",
-    "http://velocitywebtechsolution.com",
-    "http://www.velocitywebtechsolution.com",
-    "https://velocitywebtechsolution.com",
-    "https://www.velocitywebtechsolution.com",
+    "http://velocitywebtechsolutions.com",
+    "http://www.velocitywebtechsolutions.com",
+    "https://velocitywebtechsolutions.com",
+    "https://www.velocitywebtechsolutions.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
@@ -86,10 +86,10 @@ CSRF_TRUSTED_ORIGINS = [
    "http://127.0.0.1:3000",
    "http://127.0.0.1:8000",
    "http://localhost:8000",
-   "http://velocitywebtechsolution.com",
-   "http://www.velocitywebtechsolution.com",
-   "https://velocitywebtechsolution.com",
-   "https://www.velocitywebtechsolution.com",
+   "http://velocitywebtechsolutions.com",
+   "http://www.velocitywebtechsolutions.com",
+   "https://velocitywebtechsolutions.com",
+   "https://www.velocitywebtechsolutions.com",
 ]
 
 
@@ -128,7 +128,7 @@ JAZZMIN_SETTINGS = {
         {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
         {
             "name": "Support",
-            "url": "mailto:subhankar.rc@velocitywebtechsolution.com",
+            "url": "mailto:subhankar.rc@velocitywebtechsolutions.com",
             "new_window": True,
         },
         {"model": "auth.User"},
@@ -281,7 +281,7 @@ CORS_ORIGIN_ALLOW=True
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
-BUSINESS_EMAIL = "subhankar.rc@velocitywebtechsolution.com"
+BUSINESS_EMAIL = "subhankar.rc@velocitywebtechsolutions.com"
 EMAIL_BACKEND = os.getenv(
     "EMAIL_BACKEND",
     "django.core.mail.backends.console.EmailBackend",

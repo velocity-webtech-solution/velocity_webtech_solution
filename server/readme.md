@@ -66,10 +66,10 @@ export EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
 export EMAIL_HOST=smtp.gmail.com
 export EMAIL_PORT=587
 export EMAIL_USE_TLS=True
-export EMAIL_HOST_USER=subhankar.rc@velocitywebtechsolution.com
+export EMAIL_HOST_USER=subhankar.rc@velocitywebtechsolutions.com
 export EMAIL_HOST_PASSWORD=your-google-app-password
-export DEFAULT_FROM_EMAIL=subhankar.rc@velocitywebtechsolution.com
-export CONTACT_RECEIVER_EMAIL=subhankar.rc@velocitywebtechsolution.com
+export DEFAULT_FROM_EMAIL=subhankar.rc@velocitywebtechsolutions.com
+export CONTACT_RECEIVER_EMAIL=subhankar.rc@velocitywebtechsolutions.com
 ```
 
 Important: `EMAIL_HOST_PASSWORD` must be a Google App Password, not the normal Gmail/Google account password.
@@ -211,7 +211,7 @@ http://localhost:3000/
 For the business email:
 
 ```text
-subhankar.rc@velocitywebtechsolution.com
+subhankar.rc@velocitywebtechsolutions.com
 ```
 
 Enable 2-Step Verification in Google Account, then create an App Password:

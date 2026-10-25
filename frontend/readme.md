@@ -13,8 +13,8 @@ This guide explains how to deploy the Velocity Webtech project on an AWS EC2 Ubu
 Production domain used in this project:
 
 ```text
-velocitywebtechsolution.com
-www.velocitywebtechsolution.com
+velocitywebtechsolutions.com
+www.velocitywebtechsolutions.com
 ```
 
 EC2 public IP used:
@@ -132,7 +132,7 @@ For systemd deployment, do not use `export`. Use this format:
 ```env
 SECRET_KEY=your-django-secret-key
 DEBUG=False
-ALLOWED_HOSTS=13.201.101.168,localhost,127.0.0.1,velocitywebtechsolution.com,www.velocitywebtechsolution.com
+ALLOWED_HOSTS=13.201.101.168,localhost,127.0.0.1,velocitywebtechsolutions.com,www.velocitywebtechsolutions.com
 
 ENGINE=django.db.backends.postgresql
 NAME=velocity_DB
@@ -145,10 +145,10 @@ EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
-EMAIL_HOST_USER=subhankar.rc@velocitywebtechsolution.com
+EMAIL_HOST_USER=subhankar.rc@velocitywebtechsolutions.com
 EMAIL_HOST_PASSWORD=your-google-app-password
-DEFAULT_FROM_EMAIL=subhankar.rc@velocitywebtechsolution.com
-CONTACT_RECEIVER_EMAIL=subhankar.rc@velocitywebtechsolution.com
+DEFAULT_FROM_EMAIL=subhankar.rc@velocitywebtechsolutions.com
+CONTACT_RECEIVER_EMAIL=subhankar.rc@velocitywebtechsolutions.com
 ```
 
 Save nano:
@@ -294,7 +294,7 @@ Paste:
 ```nginx
 server {
     listen 80;
-    server_name 13.201.101.168 velocitywebtechsolution.com www.velocitywebtechsolution.com;
+    server_name 13.201.101.168 velocitywebtechsolutions.com www.velocitywebtechsolutions.com;
 
     client_max_body_size 100M;
 
@@ -390,8 +390,8 @@ DNS can take a few minutes to a few hours.
 Check DNS:
 
 ```bash
-nslookup velocitywebtechsolution.com
-nslookup www.velocitywebtechsolution.com
+nslookup velocitywebtechsolutions.com
+nslookup www.velocitywebtechsolutions.com
 ```
 
 Both should resolve to:
@@ -411,7 +411,7 @@ sudo apt install -y certbot python3-certbot-nginx
 Generate SSL certificate:
 
 ```bash
-sudo certbot --nginx -d velocitywebtechsolution.com -d www.velocitywebtechsolution.com
+sudo certbot --nginx -d velocitywebtechsolutions.com -d www.velocitywebtechsolutions.com
 ```
 
 When asked to share email with EFF, choose either:
@@ -425,14 +425,14 @@ When asked about HTTP to HTTPS redirect, choose redirect option if shown.
 Test HTTPS:
 
 ```bash
-curl -I https://velocitywebtechsolution.com/
-curl -I https://www.velocitywebtechsolution.com/
+curl -I https://velocitywebtechsolutions.com/
+curl -I https://www.velocitywebtechsolutions.com/
 ```
 
 Open:
 
 ```text
-https://velocitywebtechsolution.com/
+https://velocitywebtechsolutions.com/
 ```
 
 Test renewal:
@@ -446,53 +446,53 @@ sudo certbot renew --dry-run
 Website:
 
 ```text
-https://velocitywebtechsolution.com/
+https://velocitywebtechsolutions.com/
 ```
 
 About section:
 
 ```text
-https://velocitywebtechsolution.com/#about
+https://velocitywebtechsolutions.com/#about
 ```
 
 Contact section:
 
 ```text
-https://velocitywebtechsolution.com/#contact
+https://velocitywebtechsolutions.com/#contact
 ```
 
 Admin enquiries:
 
 ```text
-https://velocitywebtechsolution.com/admin/enquiries/
+https://velocitywebtechsolutions.com/admin/enquiries/
 ```
 
 Django admin:
 
 ```text
-https://velocitywebtechsolution.com/api/admin/
+https://velocitywebtechsolutions.com/api/admin/
 ```
 
 Services pricing overview:
 
 ```text
-https://velocitywebtechsolution.com/services-pricing/
+https://velocitywebtechsolutions.com/services-pricing/
 ```
 
 Individual pricing pages:
 
 ```text
-https://velocitywebtechsolution.com/website-development-services/
-https://velocitywebtechsolution.com/mobile-app-development-services/
-https://velocitywebtechsolution.com/custom-software-development-services/
-https://velocitywebtechsolution.com/e-commerce-development-services/
-https://velocitywebtechsolution.com/ui-ux-design-services-pricing/
-https://velocitywebtechsolution.com/api-backend-development-services/
-https://velocitywebtechsolution.com/cloud-deployment-services/
-https://velocitywebtechsolution.com/crm-erp-business-management-systems-services/
-https://velocitywebtechsolution.com/website-software-maintenance-services/
-https://velocitywebtechsolution.com/domain-hosting-assistance-services/
-https://velocitywebtechsolution.com/software-training-services/
+https://velocitywebtechsolutions.com/website-development-services/
+https://velocitywebtechsolutions.com/mobile-app-development-services/
+https://velocitywebtechsolutions.com/custom-software-development-services/
+https://velocitywebtechsolutions.com/e-commerce-development-services/
+https://velocitywebtechsolutions.com/ui-ux-design-services-pricing/
+https://velocitywebtechsolutions.com/api-backend-development-services/
+https://velocitywebtechsolutions.com/cloud-deployment-services/
+https://velocitywebtechsolutions.com/crm-erp-business-management-systems-services/
+https://velocitywebtechsolutions.com/website-software-maintenance-services/
+https://velocitywebtechsolutions.com/domain-hosting-assistance-services/
+https://velocitywebtechsolutions.com/software-training-services/
 ```
 
 ## 13. Deploy Updates After Code Changes
@@ -548,7 +548,7 @@ Because in a browser, `127.0.0.1` means the visitor's own computer.
 Update backend `.env`:
 
 ```env
-ALLOWED_HOSTS=13.201.101.168,localhost,127.0.0.1,velocitywebtechsolution.com,www.velocitywebtechsolution.com
+ALLOWED_HOSTS=13.201.101.168,localhost,127.0.0.1,velocitywebtechsolutions.com,www.velocitywebtechsolutions.com
 ```
 
 Restart backend:
@@ -597,7 +597,7 @@ EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
-EMAIL_HOST_USER=subhankar.rc@velocitywebtechsolution.com
+EMAIL_HOST_USER=subhankar.rc@velocitywebtechsolutions.com
 EMAIL_HOST_PASSWORD=your-google-app-password
 ```
 
